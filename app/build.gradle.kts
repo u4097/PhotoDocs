@@ -1,3 +1,8 @@
+import com.android.build.gradle.api.ApplicationVariant
+import com.android.build.gradle.api.BaseVariantOutput
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -5,6 +10,13 @@ plugins {
     id("androidx.navigation.safeargs")
     id("org.jmailen.kotlinter") version "1.21.0"
 }
+
+androidExtensions {
+    configure(delegateClosureOf<AndroidExtensionsExtension> {
+        isExperimental = true
+    })
+}
+
 
 android {
     compileSdkVersion(28)
@@ -15,6 +27,35 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        versionCode =
+            (AppVersion.majorAppVersion * 10_000) + (AppVersion.minorAppVersion * 1_000) + (AppVersion.patchAppVersion * 100)
+
+        versionName = "${AppVersion.majorAppVersion}" +
+                ".${AppVersion.minorAppVersion}" +
+                ".${AppVersion.patchAppVersion}"
+
+
+        applicationVariants.all(object : Action<ApplicationVariant> {
+            override fun execute(variant: ApplicationVariant) {
+                println("variant: $variant")
+                variant.outputs.all(object : Action<BaseVariantOutput> {
+                    override fun execute(output: BaseVariantOutput) {
+
+                        val outputImpl = output as BaseVariantOutputImpl
+                        val fileName = output.outputFileName
+                            .replace("-release", "-release-v$versionName-vc$versionCode")
+                            .replace("-debug", "-debug-v$versionName-vc$versionCode")
+                        println("output file name: $fileName")
+                        outputImpl.outputFileName = fileName
+                    }
+                })
+            }
+        })
+
+
+
     }
     buildTypes {
         getByName("release") {
@@ -40,6 +81,13 @@ android {
     }
 
 }
+
+kotlinter {
+    ignoreFailures = false
+    indentSize = 4
+    continuationIndentSize = 4
+}
+
 
 
 dependencies {
