@@ -5,7 +5,7 @@ import au.com.gridstone.debugdrawer.LumberYard
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 
-class PhotoDocs : Application() {
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()

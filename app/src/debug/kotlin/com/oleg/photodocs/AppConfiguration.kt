@@ -8,6 +8,12 @@ import android.os.PowerManager.FULL_WAKE_LOCK
 import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
 import au.com.gridstone.debugdrawer.*
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.oleg.photodocs.HttpConfiguration.API_URL
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.mock.MockRetrofit
+import retrofit2.mock.NetworkBehavior
 
 object AppConfiguration {
     private lateinit var app: Application
@@ -16,13 +22,48 @@ object AppConfiguration {
         this.app = app
     }
 
+    private val endpoints = listOf(
+        Endpoint("Mock", "http://localhost/mock/", isMock = true),
+        Endpoint("Production", API_URL, isMock = false)
+    )
+
+
+    private val networkBehavior = NetworkBehavior.create()
+    private val httpLogger by lazy { HttpLogger(app) }
+    private val debugRetrofitConfig by lazy { DebugRetrofitConfig(app, endpoints, networkBehavior) }
+
+
+    val api: RemoteApi by lazy { createApi() }
+
+
+    private fun createApi(): RemoteApi {
+        val currentEndpoint: Endpoint = debugRetrofitConfig.currentEndpoint
+        val httpClient = HttpConfiguration.client.newBuilder()
+            .addInterceptor(httpLogger.interceptor)
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(currentEndpoint.url)
+            .client(httpClient)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+
+        if (currentEndpoint.isMock) {
+            val mockRetrofit = MockRetrofit.Builder(retrofit).networkBehavior(networkBehavior).build()
+            return MockRemoteApi(mockRetrofit)
+        }
+
+        return retrofit.create<RemoteApi>(RemoteApi::class.java)
+    }
+
 
     fun getRootViewContainerFor(activity: Activity): ViewGroup {
         return DebugDrawer.with(activity)
-//            .addSectionTitle("Network")
-//            .addModule(RetrofitModule(debugRetrofitConfig))
-//            .addSectionTitle("Logs")
-//            .addModule(OkHttpLoggerModule(httpLogger))
+            .addSectionTitle("Network")
+            .addModule(RetrofitModule(debugRetrofitConfig))
+            .addSectionTitle("Logs")
+            .addModule(OkHttpLoggerModule(httpLogger))
             .addModule(TimberModule())
             .addModule(LeakCanaryModule())
             .addSectionTitle("Device information")
@@ -39,8 +80,8 @@ object AppConfiguration {
      */
     fun riseAndShine(activity: Activity) {
         activity.window.addFlags(FLAG_SHOW_WHEN_LOCKED);
-        val power: PowerManager =  activity.getSystemService(POWER_SERVICE) as PowerManager
-        val lock : PowerManager.WakeLock = power.newWakeLock(FULL_WAKE_LOCK , "photoDocks:wakeup!")
+        val power: PowerManager = activity.getSystemService(POWER_SERVICE) as PowerManager
+        val lock: PowerManager.WakeLock = power.newWakeLock(FULL_WAKE_LOCK, "photoDocks:wakeup!")
         lock.acquire(5)
         lock.release()
     }
