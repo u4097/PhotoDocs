@@ -62,6 +62,8 @@ object Versions {
 	const val materialDisign = "1.0.0"
 
 	const val debugDrawer = "0.9.4"
+
+	const val picasso = "2.71828"
 }
 
 
@@ -119,6 +121,7 @@ object Libraries {
 	const val debugDrawerRetrofit = "au.com.gridstone.debugdrawer:debugdrawer-retrofit:${Versions.debugDrawer}"
     const val debugDrawerTimber = "au.com.gridstone.debugdrawer:debugdrawer-timber:${Versions.debugDrawer}"
     const val debugDrawerOkHTTP = "au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:${Versions.debugDrawer}"
+	const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
 }
 
 // API URL

@@ -23,11 +23,11 @@ class MainViewModel : ViewModel(), CoroutineScope {
 
     fun refreshIfNecessary() {
         if (mutableStates.value is State.Idle || mutableStates.value is Error) {
-            refresh()
+            login()
         }
     }
 
-    fun refresh() {
+    fun login() {
         mutableStates.value = State.Loading
 
         launch {

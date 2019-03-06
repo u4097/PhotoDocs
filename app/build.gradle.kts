@@ -124,6 +124,8 @@ dependencies {
     /** Design */
     // Fresco
     implementation(Libraries.fresco)
+    // Picasso
+    implementation(Libraries.picasso)
 
     /** Debug Drawer */
     implementation(Libraries.debugDrawer)
