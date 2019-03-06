@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-//        val viewModel: MainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-//        viewModel.refreshIfNecessary()
+        val viewModel: MainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel.refreshIfNecessary()
     }
 
 

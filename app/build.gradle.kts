@@ -110,7 +110,8 @@ dependencies {
 
     /** Networkin */
     // Coroutines
-    implementation(Libraries.coroutines)
+    implementation(Libraries.coroutinesKotlinAndroid)
+
     // Retrofit
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitCoroutines)
