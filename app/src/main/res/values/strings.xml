@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PhotoDocs</string>
+    <string name="drawer_version_name">Name</string>
+    <string name="drawer_version_code">Code</string>
 </resources>

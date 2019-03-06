@@ -27,6 +27,8 @@ object AppConfiguration {
             .addModule(LeakCanaryModule())
             .addSectionTitle("Device information")
             .addModule(DeviceInfoModule())
+            .addSectionTitle("Version information")
+            .addModule(VersionInfoModule())
             .buildMainContainer()
     }
 
