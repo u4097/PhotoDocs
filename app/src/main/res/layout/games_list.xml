@@ -1,62 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ViewAnimator
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/games_viewAnimator"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:inAnimation="@android:anim/fade_in"
-    android:outAnimation="@android:anim/fade_out"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/games_viewAnimator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inAnimation="@android:anim/fade_in"
+        android:outAnimation="@android:anim/fade_out"
+>
+
+    <LinearLayout
+            android:id="@+id/games_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
     >
 
-  <LinearLayout
-      android:id="@+id/games_loading"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:gravity="center"
-      android:orientation="vertical"
-      >
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loading"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loading"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         />
 
-  </LinearLayout>
+    </LinearLayout>
 
-  <LinearLayout
-      android:id="@+id/games_error"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:gravity="center"
-      android:orientation="vertical"
-      tools:ignore="UseCompoundDrawables"
-      >
+    <LinearLayout
+            android:id="@+id/games_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables"
+    >
 
-    <ImageView
-        android:id="@+id/games_error_image"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        tools:ignore="ContentDescription"
+        <ImageView
+                android:id="@+id/games_error_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                tools:ignore="ContentDescription"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/error"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/error"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         />
 
-  </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+    >
+        <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="150dp"
+                android:gravity="center"
+                 android:textSize="18sp"
+                android:layout_gravity="center_vertical"
+                android:text="Retrofit response"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        />
+        <TextView
+                android:id="@+id/token_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:paddingHorizontal="8dp"
+                android:text="SDFA33344SDFASDFSDFADFADF"
+                tools:text="SDFA33344SDFASDFSDFADFADF"
+        />
+
+    </LinearLayout>
 
 
 </ViewAnimator>

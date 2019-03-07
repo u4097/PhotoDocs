@@ -4,4 +4,5 @@
     <string name="drawer_version_code">Code</string>
     <string name="loading">Loading photo…</string>
     <string name="error">Error fetching photo</string>
+    <string name="refresh">Refresh</string>
 </resources>
