@@ -1,5 +1,6 @@
-package com.oleg.photodocs
+package com.oleg.photodocs.networking
 
+import com.oleg.photodocs.presentation.LoginResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 

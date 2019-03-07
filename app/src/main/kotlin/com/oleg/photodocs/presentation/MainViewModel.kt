@@ -1,8 +1,10 @@
-package com.oleg.photodocs
+package com.oleg.photodocs.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.oleg.photodocs.AppConfiguration
+import com.oleg.photodocs.networking.RemoteApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

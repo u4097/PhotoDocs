@@ -1,4 +1,4 @@
-package com.oleg.photodocs
+package com.oleg.photodocs.networking
 
 import okhttp3.HttpUrl
 import okhttp3.Interceptor

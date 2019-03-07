@@ -121,6 +121,11 @@ dependencies {
     // Moshi
     implementation(Libraries.moshi)
 
+    // Cache
+    implementation(Libraries.layercache)
+    implementation(Libraries.layercacheAndroid)
+    implementation(Libraries.layercacheLiveData)
+
 
     /** DI */
     implementation(Libraries.koinAndroid)

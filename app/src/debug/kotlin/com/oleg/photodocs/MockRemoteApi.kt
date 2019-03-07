@@ -1,5 +1,7 @@
 package com.oleg.photodocs
 
+import com.oleg.photodocs.networking.RemoteApi
+import com.oleg.photodocs.presentation.LoginResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.mock.BehaviorDelegate
 import retrofit2.mock.MockRetrofit

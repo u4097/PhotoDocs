@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
 import au.com.gridstone.debugdrawer.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.oleg.photodocs.HttpConfiguration.API_URL
+import com.oleg.photodocs.networking.HttpConfiguration
+import com.oleg.photodocs.networking.HttpConfiguration.API_URL
+import com.oleg.photodocs.networking.RemoteApi
+import com.oleg.photodocs.presentation.utils.VersionInfoModule
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.mock.MockRetrofit

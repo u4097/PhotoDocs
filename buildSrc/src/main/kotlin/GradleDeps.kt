@@ -70,6 +70,8 @@ object Versions {
     const val androidArchTest = "1.1.1"
 
     const val robolectric = "3.8"
+
+    const val layercache = "0.4.0"
 }
 
 
@@ -134,6 +136,9 @@ object Libraries {
     const val debugDrawerOkHTTP = "au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:${Versions.debugDrawer}"
     const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
 
+    const val layercache = "com.appmattus:layercache:${Versions.layercache}"
+    const val layercacheAndroid = "com.appmattus:layercache-android:${Versions.layercache}"
+    const val layercacheLiveData = "com.appmattus:layercache-android-livedata:${Versions.layercache}"
 
     // MOCK WEB SERVER
     const val mockwebserver = "com.squareup.okhttp:mockwebserver:${Versions.mockwebserver}"

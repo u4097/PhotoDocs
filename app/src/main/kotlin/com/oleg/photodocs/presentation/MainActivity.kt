@@ -1,4 +1,4 @@
-package com.oleg.photodocs
+package com.oleg.photodocs.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,8 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.oleg.photodocs.AppConfiguration.getRootViewContainerFor
 import com.oleg.photodocs.AppConfiguration.riseAndShine
+import com.oleg.photodocs.R
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.games_list.*
 
 class MainActivity : AppCompatActivity() {
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 is MainViewModel.State.Success -> {
+
                     token_tv.text = state.response.token
                     viewAnimator.displayedChild = 2
                 }

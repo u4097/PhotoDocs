@@ -1,8 +1,10 @@
-package com.oleg.photodocs
+package com.oleg.photodocs.presentation.utils
 
 import android.content.Context
 import android.content.res.Resources
 import au.com.gridstone.debugdrawer.KeyValueDebugDrawerModule
+import com.oleg.photodocs.BuildConfig
+import com.oleg.photodocs.R
 
 /**
  * A simple module that displays
