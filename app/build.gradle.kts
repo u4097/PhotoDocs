@@ -122,6 +122,11 @@ dependencies {
     implementation(Libraries.moshi)
 
 
+    /** DI */
+    implementation(Libraries.koinAndroid)
+
+
+
     /** Design */
     // Fresco
     implementation(Libraries.fresco)

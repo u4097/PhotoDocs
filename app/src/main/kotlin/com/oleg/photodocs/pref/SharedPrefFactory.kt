@@ -1,9 +1,9 @@
-package ru.prsolution.winstrike.presentation.utils.pref
+package com.oleg.photodocs.pref
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.oleg.photodocs.App
 
-import ru.prsolution.winstrike.App
 
 /**
  * Date: 18.01.2016

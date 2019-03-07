@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context.POWER_SERVICE
 import android.os.PowerManager
-import android.os.PowerManager.FULL_WAKE_LOCK
+import android.os.PowerManager.*
 import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
 import au.com.gridstone.debugdrawer.*
@@ -81,7 +81,10 @@ object AppConfiguration {
     fun riseAndShine(activity: Activity) {
         activity.window.addFlags(FLAG_SHOW_WHEN_LOCKED);
         val power: PowerManager = activity.getSystemService(POWER_SERVICE) as PowerManager
-        val lock: PowerManager.WakeLock = power.newWakeLock(FULL_WAKE_LOCK, "photoDocks:wakeup!")
+        val lock: PowerManager.WakeLock = power.newWakeLock(FULL_WAKE_LOCK
+                or ACQUIRE_CAUSES_WAKEUP
+                or ON_AFTER_RELEASE,
+            "photoDocks:wakeup!")
         lock.acquire(5)
         lock.release()
     }

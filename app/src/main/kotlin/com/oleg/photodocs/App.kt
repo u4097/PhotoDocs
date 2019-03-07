@@ -19,4 +19,9 @@ class App : Application() {
         AppConfiguration.init(this)
     }
 
+
+    companion object {
+        lateinit var instance: App
+    }
+
 }
