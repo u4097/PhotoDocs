@@ -1,9 +1,9 @@
 package com.oleg.photodocs.datasource.model.login
 
-import com.oleg.photodocs.domain.login.UserModel
+import com.oleg.photodocs.domain.model.login.LoginModel
 import com.squareup.moshi.Json
 
-class UserEntity(
+class LoginEntity(
 
 
     @field:Json(name = "name")
@@ -14,7 +14,8 @@ class UserEntity(
 
 )
 
-fun UserEntity.mapToDomain(): UserModel = UserModel(
-    name = this.name,
-    password = this.password
-)
+fun LoginEntity.mapToDomain(): LoginModel =
+    LoginModel(
+        name = this.name,
+        password = this.password
+    )

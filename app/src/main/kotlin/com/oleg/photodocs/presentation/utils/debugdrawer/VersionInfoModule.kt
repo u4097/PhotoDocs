@@ -1,4 +1,4 @@
-package com.oleg.photodocs.presentation.utils
+package com.oleg.photodocs.presentation.utils.debugdrawer
 
 import android.content.Context
 import android.content.res.Resources

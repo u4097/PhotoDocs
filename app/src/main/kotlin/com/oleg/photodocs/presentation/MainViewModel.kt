@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.oleg.photodocs.AppConfiguration
-import com.oleg.photodocs.networking.RemoteApi
+import com.oleg.photodocs.networking.LoginApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -35,11 +35,11 @@ class MainViewModel : ViewModel(), CoroutineScope {
         launch {
 
             Timber.v("Fetching games list...")
-            val api: RemoteApi = AppConfiguration.api
+            val api: LoginApi = AppConfiguration.api
 
             try {
-                val response: LoginResponse = api.loginAsync().await()
-                mutableStates.postValue(State.Success(response))
+//                val response: LoginResponse = api.loginAsync().await()
+//                mutableStates.postValue(State.Success(response))
                 Timber.v("Fetched games list successfully.")
             } catch (e: Exception) {
                 Timber.e(e, "Something went wrong when fetching games list.")

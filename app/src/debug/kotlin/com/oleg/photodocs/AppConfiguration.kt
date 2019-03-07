@@ -11,8 +11,8 @@ import au.com.gridstone.debugdrawer.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.oleg.photodocs.networking.HttpConfiguration
 import com.oleg.photodocs.networking.HttpConfiguration.API_URL
-import com.oleg.photodocs.networking.RemoteApi
-import com.oleg.photodocs.presentation.utils.VersionInfoModule
+import com.oleg.photodocs.networking.LoginApi
+import com.oleg.photodocs.presentation.utils.debugdrawer.VersionInfoModule
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.mock.MockRetrofit
@@ -36,10 +36,10 @@ object AppConfiguration {
     private val debugRetrofitConfig by lazy { DebugRetrofitConfig(app, endpoints, networkBehavior) }
 
 
-    val api: RemoteApi by lazy { createApi() }
+    val api: LoginApi by lazy { createApi() }
 
 
-    private fun createApi(): RemoteApi {
+    private fun createApi(): LoginApi {
         val currentEndpoint: Endpoint = debugRetrofitConfig.currentEndpoint
         val httpClient = HttpConfiguration.client.newBuilder()
             .addInterceptor(httpLogger.interceptor)
@@ -57,7 +57,7 @@ object AppConfiguration {
             return MockRemoteApi(mockRetrofit)
         }
 
-        return retrofit.create<RemoteApi>(RemoteApi::class.java)
+        return retrofit.create<LoginApi>(LoginApi::class.java)
     }
 
 

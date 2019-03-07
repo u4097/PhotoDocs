@@ -1,18 +1,20 @@
 package com.oleg.photodocs
 
-import com.oleg.photodocs.networking.RemoteApi
+import com.oleg.photodocs.datasource.model.login.LoginEntity
+import com.oleg.photodocs.networking.LoginApi
 import com.oleg.photodocs.presentation.LoginResponse
 import kotlinx.coroutines.Deferred
+import retrofit2.Response
 import retrofit2.mock.BehaviorDelegate
 import retrofit2.mock.MockRetrofit
 
-class MockRemoteApi(mockRetrofit: MockRetrofit) : RemoteApi {
-    private val delegate: BehaviorDelegate<RemoteApi> =
-        mockRetrofit.create(RemoteApi::class.java)
+class MockRemoteApi(mockRetrofit: MockRetrofit) : LoginApi {
+    private val delegate: BehaviorDelegate<LoginApi> =
+        mockRetrofit.create(LoginApi::class.java)
 
-    override fun loginAsync(): Deferred<LoginResponse> {
+    override fun loginAsync(loginEntity: LoginEntity): Deferred<Response<LoginResponse>> {
         val response = LoginResponse(token)
-        return delegate.returningResponse(response).loginAsync()
+        return delegate.returningResponse(response).loginAsync(loginEntity)
     }
 
     private val token =

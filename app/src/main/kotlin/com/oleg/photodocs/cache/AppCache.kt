@@ -1,5 +1,6 @@
 package com.oleg.photodocs.cache
 
+import androidx.lifecycle.LiveData
 import com.appmattus.layercache.Cache
 import com.appmattus.layercache.createLruCache
 import com.appmattus.layercache.toLiveData
@@ -24,7 +25,7 @@ class LiveDataCache<T> {
 
     fun load(key: String): Deferred<T> = liveDataCache.get(key) as Deferred<T>
 
-    fun save(key: String, anyObject: T?) =
-        liveDataCache.set(key, anyObject!!)
+    fun save(key: String, anyObject: T?): LiveData<T> =
+        liveDataCache.set(key, anyObject!!) as LiveData<T>
 
 }
