@@ -11,16 +11,13 @@ import retrofit2.mock.MockRetrofit
 class MockDocumentApi(mockRetrofit: MockRetrofit) : DocumentApi {
 
     override fun getDocumentAsync(): Deferred<Response<List<DocumentEntity>>> {
-        val response = LoginResponse(token)
+        val response = mockDocuments
         return delegate.returningResponse(response).getDocumentAsync()
     }
 
     private val delegate: BehaviorDelegate<DocumentApi> =
         mockRetrofit.create(DocumentApi::class.java)
 
-
-    private val token =
-        "mock_token"
 
     private val mockDocuments = listOf(
         DocumentEntity(

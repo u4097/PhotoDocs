@@ -18,10 +18,10 @@ open class BaseRepository {
 //        var data : Resource<T>? = null
 
         when (result.state) {
-            is ResourceState.SUCCESS ->
-                Timber.tag("$$$").d("${result.state}  - ${result.data.toString()}")
+            is ResourceState.SUCCESS ->{}
+//                Timber.tag("$$$").d("${result.state}  - ${result.data.toString()}")
             is ResourceState.ERROR -> {
-                Timber.tag("$$$").d("$errorMessage & Exception - ${result.message}")
+                Timber.e("$errorMessage & Exception - ${result.message}")
             }
         }
         return result

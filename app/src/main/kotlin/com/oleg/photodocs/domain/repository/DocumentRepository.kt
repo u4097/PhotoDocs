@@ -6,5 +6,5 @@ import com.oleg.photodocs.domain.model.login.LoginModel
 import com.oleg.photodocs.presentation.LoginResponse
 
 interface DocumentRepository {
-    suspend fun get(): Resource<List<DocumentModel>>?
+    suspend fun get(refresh: Boolean): Resource<List<DocumentModel>>?
 }

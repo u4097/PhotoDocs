@@ -10,7 +10,7 @@ import com.oleg.photodocs.presentation.LoginResponse
 
 class DocumentUseCase constructor(private val documentRepository: DocumentRepository) {
 
-    suspend fun get(): Resource<List<DocumentModel>>? =
-        documentRepository.get()
+    suspend fun get(refresh: Boolean): Resource<List<DocumentModel>>? =
+        documentRepository.get(refresh)
 
 }

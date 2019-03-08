@@ -35,9 +35,9 @@ class DocumentViewModel constructor(val documentUseCase: DocumentUseCase) : View
 
 
 
-    fun getDocuments() {
+    fun getDocuments(refresh: Boolean) {
         scope.launch {
-            val response = documentUseCase.get()
+            val response = documentUseCase.get(refresh)
             documents.postValue(response?.mapToPresentation())
         }
     }

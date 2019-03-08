@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                         Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
                     }
                     ResourceState.SUCCESS -> {
+                        mDocumentVm.getDocuments(refresh = false)
                         PrefUtils.token = it.data?.token
                         token_tv.text = it.data?.token
                         viewAnimator.displayedChild = 2
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
         mDocumentVm.documents.observe(this@MainActivity, Observer {
             it?.let {
                 when (it.state) {
@@ -77,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     ResourceState.SUCCESS -> {
                         Timber.d("Document list size: ${it.data?.size}")
+                        token_tv.text = it.data?.toString()
                         viewAnimator.displayedChild = 2
 
                     }
@@ -109,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener {
 //            mLoginVm.login(Login(login = "Admin", password = "admin2018"))
 //             mLoginVm.getToken()
-            mDocumentVm.getDocuments()
+            mDocumentVm.getDocuments(refresh = false)
             return@setOnMenuItemClickListener true
         }
 
@@ -118,7 +121,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         mLoginVm.login(Login(login = "Admin", password = "admin2018"))
-        mDocumentVm.getDocuments()
     }
 
 

@@ -16,7 +16,6 @@ class DocumentCacheDataSourceImpl constructor(
         return cache.save(key, documents)
     }
 
-
     override fun get(): Deferred<List<DocumentEntity>> =
         cache.load(key)
 }
