@@ -12,6 +12,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.oleg.photodocs.networking.HttpConfiguration
 import com.oleg.photodocs.networking.HttpConfiguration.API_URL
 import com.oleg.photodocs.networking.LoginApi
+import com.oleg.photodocs.pref.PrefUtils
 import com.oleg.photodocs.presentation.utils.debugdrawer.VersionInfoModule
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
@@ -38,6 +39,12 @@ object AppConfiguration {
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         clientBuilder.addInterceptor(httpLoggingInterceptor)
         clientBuilder.addInterceptor(ChuckInterceptor(App.instance))
+        clientBuilder.addInterceptor {
+            val newRequest = it.request().newBuilder()
+                .addHeader("Authorization", "Bearer ${PrefUtils.token}")
+                .build()
+            it.proceed(newRequest)
+        }
 
         return clientBuilder.build()
     }
