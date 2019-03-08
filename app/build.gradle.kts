@@ -47,7 +47,7 @@ android {
                         val fileName = output.outputFileName
                             .replace("-release", "-release-v$versionName-vc$versionCode")
                             .replace("-debug", "-debug-v$versionName-vc$versionCode")
-                        println("output file name: $fileName")
+                        println("output file login: $fileName")
                         outputImpl.outputFileName = fileName
                     }
                 })

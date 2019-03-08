@@ -8,7 +8,7 @@ import com.oleg.photodocs.R
 
 /**
  * A simple module that displays
- *  - Version name
+ *  - Version login
  *  - Version code
  */
 class VersionInfoModule : KeyValueDebugDrawerModule() {

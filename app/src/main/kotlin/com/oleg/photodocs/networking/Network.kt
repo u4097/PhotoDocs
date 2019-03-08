@@ -20,13 +20,14 @@ private fun httpClient(debug: Boolean): OkHttpClient {
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         clientBuilder.addInterceptor(httpLoggingInterceptor)
         clientBuilder.addInterceptor(ChuckInterceptor(App.instance))
-        clientBuilder.addInterceptor {
+
+/*        clientBuilder.addInterceptor {
             val newRequest = it.request().newBuilder()
                 .addHeader("Authorization", "Bearer ${PrefUtils.token}")
                 .build()
             it.proceed(newRequest)
-//        }
-    }
+        }*/
+//    } // debug if
     with(clientBuilder) {
         connectTimeout(120, TimeUnit.SECONDS)
         readTimeout(120, TimeUnit.SECONDS)

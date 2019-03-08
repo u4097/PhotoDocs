@@ -45,11 +45,11 @@ val repositoryModule: Module = module {
 
 val dataSourceModule: Module = module {
     single { LoginCacheDataSourceImpl(cache = get(LOGIN_CACHE)) as LoginCacheDataSource }
-    single { LoginRemoteDataSourceImpl(api = userApi) as LoginRemoteDataSource }
+    single { LoginRemoteDataSourceImpl(api = loginApi) as LoginRemoteDataSource }
 }
 
 val networkModule: Module = module {
-    single { userApi }
+    single { loginApi }
 }
 
 val cacheModule: Module = module {
@@ -62,6 +62,6 @@ private const val PROD_URL = BuildConfig.PROD_URL
 
 private val retrofit: Retrofit = createNetworkClient(DEV_URL, BuildConfig.DEBUG)
 
-private val userApi: LoginApi = retrofit.create(LoginApi::class.java)
+private val loginApi: LoginApi = retrofit.create(LoginApi::class.java)
 
 private const val LOGIN_CACHE = "LOGIN_CACHE"

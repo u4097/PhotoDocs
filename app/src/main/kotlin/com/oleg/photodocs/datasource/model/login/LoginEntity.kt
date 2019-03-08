@@ -6,8 +6,8 @@ import com.squareup.moshi.Json
 class LoginEntity(
 
 
-    @field:Json(name = "name")
-    val name: String?,
+    @field:Json(name = "login")
+    val login: String?,
 
     @field:Json(name = "password")
     val password: String?
@@ -16,6 +16,6 @@ class LoginEntity(
 
 fun LoginEntity.mapToDomain(): LoginModel =
     LoginModel(
-        name = this.name,
+        login = this.login,
         password = this.password
     )

@@ -6,6 +6,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * Created by Oleg Sitnikov
@@ -14,7 +15,7 @@ import retrofit2.http.GET
  */
 
 interface LoginApi {
-    @GET("auth/login/")
+    @POST("auth/login/")
     fun loginAsync(
         @Body loginEntity: LoginEntity
     ): Deferred <Response<LoginResponse>>

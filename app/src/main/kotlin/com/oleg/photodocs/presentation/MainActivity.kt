@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         // Put refresh button in toolbar menu and have it refresh the games list.
         toolbar.inflateMenu(R.menu.home)
         toolbar.setOnMenuItemClickListener {
-            mVm.login(Login(name = "Admin", password = "123456"))
+            mVm.login(Login(login = "Admin", password = "123456"))
             return@setOnMenuItemClickListener true
         }
 
