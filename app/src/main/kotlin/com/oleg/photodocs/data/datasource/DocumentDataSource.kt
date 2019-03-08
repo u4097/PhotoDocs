@@ -9,9 +9,9 @@ import kotlinx.coroutines.Deferred
 
 interface DocumentCacheDataSource {
 
-    fun get(): Deferred<String>
+    fun get(): Deferred<List<DocumentEntity>>
 
-    fun set(documents: List<DocumentEntity>): Deferred<String>
+    fun set(documents: List<DocumentEntity>): Deferred<List<DocumentEntity>>
 
 }
 

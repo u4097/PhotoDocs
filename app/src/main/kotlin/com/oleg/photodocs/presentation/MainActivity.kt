@@ -108,7 +108,8 @@ class MainActivity : AppCompatActivity() {
         toolbar.inflateMenu(R.menu.home)
         toolbar.setOnMenuItemClickListener {
 //            mLoginVm.login(Login(login = "Admin", password = "admin2018"))
-             mLoginVm.getToken()
+//             mLoginVm.getToken()
+            mDocumentVm.getDocuments()
             return@setOnMenuItemClickListener true
         }
 
