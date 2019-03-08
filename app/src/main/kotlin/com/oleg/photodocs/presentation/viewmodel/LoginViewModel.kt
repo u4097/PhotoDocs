@@ -30,6 +30,14 @@ class LoginViewModel constructor(val loginUseCase: LoginUseCase) : ViewModel() {
 
     val loginResponse = SingleLiveEvent<Resource<LoginResponse>>()
 
+    val token = SingleLiveEvent<Resource<String>>()
+
+    fun getToken() {
+        scope.launch {
+            val response = loginUseCase.getToken()
+            token.postValue(response)
+        }
+    }
 
     fun login(login: Login) {
         scope.launch {

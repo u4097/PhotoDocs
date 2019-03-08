@@ -7,7 +7,6 @@ import com.oleg.photodocs.data.repository.resouces.ResourceState
 import com.oleg.photodocs.domain.model.login.LoginModel
 import com.oleg.photodocs.domain.model.login.mapToDataSource
 import com.oleg.photodocs.domain.repository.LoginRepository
-import com.oleg.photodocs.pref.PrefUtils.token
 import com.oleg.photodocs.presentation.LoginResponse
 
 class LoginRepositoryImpl constructor(
@@ -15,25 +14,28 @@ class LoginRepositoryImpl constructor(
     private val remoteDataSource: LoginRemoteDataSource
 ) : LoginRepository {
 
-    private var token: String? = null
-
-    override suspend fun get(loginModel: LoginModel): Resource<LoginResponse>? {
-/*        var response = cacheDataSource.get()
+    override suspend fun getToken(): Resource<String>? {
+        var token: String?
+        var response = cacheDataSource.get()
         response.await().let {
             token = it
         }
         token?.let {
             if (!token?.isEmpty()!!) {
-                return Resource(ResourceState.SUCCESS, LoginResponse(token!!))
+                return Resource(ResourceState.SUCCESS, token)
             } else {
-                return remoteDataSource.get(loginModel.mapToDataSource())
+                return Resource(ResourceState.ERROR, null, "Token is empty")
             }
-        }*/
-
-        val loginResponse = remoteDataSource.get(loginModel.mapToDataSource())
-        cacheDataSource.set(loginResponse?.data?.token)
-        return loginResponse
+        }
+        return Resource(ResourceState.SUCCESS, token)
     }
 
-}
+
+        override suspend fun get(loginModel: LoginModel): Resource<LoginResponse>? {
+            val loginResponse = remoteDataSource.get(loginModel.mapToDataSource())
+            cacheDataSource.set(loginResponse?.data?.token)
+            return loginResponse
+        }
+
+    }
 

@@ -13,6 +13,7 @@ import com.oleg.photodocs.AppConfiguration.getRootViewContainerFor
 import com.oleg.photodocs.AppConfiguration.riseAndShine
 import com.oleg.photodocs.R
 import com.oleg.photodocs.data.repository.resouces.ResourceState
+import com.oleg.photodocs.pref.PrefUtils
 import com.oleg.photodocs.presentation.model.login.Login
 import com.oleg.photodocs.presentation.viewmodel.LoginViewModel
 import com.squareup.picasso.Picasso
@@ -55,7 +56,25 @@ class MainActivity : AppCompatActivity() {
                         Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
                     }
                     ResourceState.SUCCESS -> {
+                        PrefUtils.token = it.data?.token
                         token_tv.text = it.data?.token
+                        viewAnimator.displayedChild = 2
+                    }
+                }
+            }
+        })
+
+        mVm.token.observe(this@MainActivity, Observer {
+            it?.let {
+                when (it.state) {
+                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
+                    ResourceState.ERROR -> {
+                        viewAnimator.displayedChild = 1
+                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
+                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
+                    }
+                    ResourceState.SUCCESS -> {
+                        token_tv.text = "toke: ${it.data}"
                         viewAnimator.displayedChild = 2
 
                     }
@@ -67,7 +86,8 @@ class MainActivity : AppCompatActivity() {
         // Put refresh button in toolbar menu and have it refresh the games list.
         toolbar.inflateMenu(R.menu.home)
         toolbar.setOnMenuItemClickListener {
-            mVm.login(Login(login = "Admin", password = "admin2018"))
+//            mVm.login(Login(login = "Admin", password = "admin2018"))
+             mVm.getToken()
             return@setOnMenuItemClickListener true
         }
 
