@@ -1,7 +1,8 @@
 package com.oleg.photodocs.presentation
 
+import com.oleg.photodocs.App
 import com.oleg.photodocs.BuildConfig
-import com.oleg.photodocs.cache.LiveDataCache
+import com.oleg.photodocs.cache.DiskLruCache
 import com.oleg.photodocs.data.datasource.LoginCacheDataSource
 import com.oleg.photodocs.data.datasource.LoginRemoteDataSource
 import com.oleg.photodocs.data.repository.LoginRepositoryImpl
@@ -53,7 +54,7 @@ val networkModule: Module = module {
 }
 
 val cacheModule: Module = module {
-    single(name = LOGIN_CACHE) { LiveDataCache<LoginResponse>() }
+    single(name = LOGIN_CACHE) { DiskLruCache<LoginResponse>(App.instance.dirForCache) }
 }
 
 private const val DEV_URL = BuildConfig.DEV_URL

@@ -35,36 +35,31 @@ class MainActivity : AppCompatActivity() {
         // Koin  DI init
         injectFeature()
 
+        // Wake up activity in devices on run
         riseAndShine(this)
 
         // Wire up navigation drawer to open on toolbar button clicks.
         val toolbar: Toolbar = findViewById(R.id.home_toolbar)
 
         val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
-//        val viewModel: MainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
 
         // Observe ViewModel state and change UI accordingly.
         mVm.loginResponse.observe(this@MainActivity, Observer {
             it?.let {
-                // TODO: process error!
                 when (it.state) {
                     ResourceState.LOADING -> viewAnimator.displayedChild = 0
-                    ResourceState.SUCCESS -> {
-                        token_tv.text = it.data.toString()
-                        viewAnimator.displayedChild = 2
-
-                    }
                     ResourceState.ERROR -> {
                         viewAnimator.displayedChild = 1
                         val errorImageView: ImageView = findViewById(R.id.games_error_image)
                         Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
                     }
+                    ResourceState.SUCCESS -> {
+                        token_tv.text = it.data?.token
+                        viewAnimator.displayedChild = 2
+
+                    }
                 }
-//                it.data?.let { //                    onConfirmSuccess(it)
-//                }
-//                it.message?.let { //                    onConfirmFailure(it)
-//                }
             }
         })
 
@@ -72,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         // Put refresh button in toolbar menu and have it refresh the games list.
         toolbar.inflateMenu(R.menu.home)
         toolbar.setOnMenuItemClickListener {
-            mVm.login(Login(login = "Admin", password = "123456"))
+            mVm.login(Login(login = "Admin", password = "admin2018"))
             return@setOnMenuItemClickListener true
         }
 
@@ -80,9 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-//        val viewModel: MainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-//        viewModel.refreshIfNecessary()
+        mVm.login(Login(login = "Admin", password = "admin2018"))
     }
 
 
