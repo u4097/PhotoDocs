@@ -18,18 +18,17 @@ class LoginRepositoryImpl constructor(
     private var token: String? = null
 
     override suspend fun get(loginModel: LoginModel): Resource<LoginResponse>? {
-        var response = cacheDataSource.get()
+/*        var response = cacheDataSource.get()
         response.await().let {
             token = it
         }
         token?.let {
-
             if (!token?.isEmpty()!!) {
                 return Resource(ResourceState.SUCCESS, LoginResponse(token!!))
             } else {
                 return remoteDataSource.get(loginModel.mapToDataSource())
             }
-        }
+        }*/
 
         val loginResponse = remoteDataSource.get(loginModel.mapToDataSource())
         cacheDataSource.set(loginResponse?.data?.token)

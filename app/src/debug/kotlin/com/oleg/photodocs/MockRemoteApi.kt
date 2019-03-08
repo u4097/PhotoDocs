@@ -9,6 +9,7 @@ import retrofit2.mock.BehaviorDelegate
 import retrofit2.mock.MockRetrofit
 
 class MockRemoteApi(mockRetrofit: MockRetrofit) : LoginApi {
+
     private val delegate: BehaviorDelegate<LoginApi> =
         mockRetrofit.create(LoginApi::class.java)
 
@@ -18,6 +19,6 @@ class MockRemoteApi(mockRetrofit: MockRetrofit) : LoginApi {
     }
 
     private val token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IkFkbWluIiwiZXhwIjoxNTUyNDk1MDc3LCJsb2dpbiI6IkFkbWluIiwib3JpZ19pYXQiOjE1NTE4OTAyNzd9.ggmZGNUafKRpXmLT2K05176auY01qeA9hS3XUhrhKVg"
+        "mock_token"
 
 }

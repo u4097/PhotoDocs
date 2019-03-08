@@ -10,5 +10,4 @@ class LoginUseCase constructor(private val loginRepository: LoginRepository) {
 
     suspend fun get(loginModel: LoginModel): Resource<LoginResponse>? =
         loginRepository.get(loginModel)
-
 }

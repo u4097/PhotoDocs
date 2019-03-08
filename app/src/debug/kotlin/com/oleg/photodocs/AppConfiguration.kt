@@ -13,16 +13,44 @@ import com.oleg.photodocs.networking.HttpConfiguration
 import com.oleg.photodocs.networking.HttpConfiguration.API_URL
 import com.oleg.photodocs.networking.LoginApi
 import com.oleg.photodocs.presentation.utils.debugdrawer.VersionInfoModule
+import com.readystatesoftware.chuck.ChuckInterceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.mock.MockRetrofit
 import retrofit2.mock.NetworkBehavior
+
 
 object AppConfiguration {
     private lateinit var app: Application
 
     fun init(app: Application) {
         this.app = app
+    }
+
+    fun createNetworkClient() =
+        retrofitClient(httpClient())
+
+    private fun httpClient(): OkHttpClient {
+        val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
+        val clientBuilder = OkHttpClient.Builder()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        clientBuilder.addInterceptor(httpLoggingInterceptor)
+        clientBuilder.addInterceptor(ChuckInterceptor(App.instance))
+
+        return clientBuilder.build()
+    }
+
+    private fun retrofitClient(httpClient: OkHttpClient): Retrofit {
+        val currentEndpoint: Endpoint = debugRetrofitConfig.currentEndpoint
+        return Retrofit.Builder()
+            .baseUrl(currentEndpoint.url)
+            .client(httpClient)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+
     }
 
     private val endpoints = listOf(
@@ -34,23 +62,15 @@ object AppConfiguration {
     private val networkBehavior = NetworkBehavior.create()
     private val httpLogger by lazy { HttpLogger(app) }
     private val debugRetrofitConfig by lazy { DebugRetrofitConfig(app, endpoints, networkBehavior) }
+    private val retrofit by lazy { createNetworkClient() }
 
 
     val api: LoginApi by lazy { createApi() }
 
 
     private fun createApi(): LoginApi {
-        val currentEndpoint: Endpoint = debugRetrofitConfig.currentEndpoint
-        val httpClient = HttpConfiguration.client.newBuilder()
-            .addInterceptor(httpLogger.interceptor)
-            .build()
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl(currentEndpoint.url)
-            .client(httpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .build()
+        val currentEndpoint: Endpoint = debugRetrofitConfig.currentEndpoint
 
         if (currentEndpoint.isMock) {
             val mockRetrofit = MockRetrofit.Builder(retrofit).networkBehavior(networkBehavior).build()
@@ -84,10 +104,12 @@ object AppConfiguration {
     fun riseAndShine(activity: Activity) {
         activity.window.addFlags(FLAG_SHOW_WHEN_LOCKED);
         val power: PowerManager = activity.getSystemService(POWER_SERVICE) as PowerManager
-        val lock: PowerManager.WakeLock = power.newWakeLock(FULL_WAKE_LOCK
-                or ACQUIRE_CAUSES_WAKEUP
-                or ON_AFTER_RELEASE,
-            "photoDocks:wakeup!")
+        val lock: PowerManager.WakeLock = power.newWakeLock(
+            FULL_WAKE_LOCK
+                    or ACQUIRE_CAUSES_WAKEUP
+                    or ON_AFTER_RELEASE,
+            "photoDocks:wakeup!"
+        )
         lock.acquire(5)
         lock.release()
     }

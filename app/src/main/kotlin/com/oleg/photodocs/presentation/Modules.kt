@@ -1,6 +1,7 @@
 package com.oleg.photodocs.presentation
 
 import com.oleg.photodocs.App
+import com.oleg.photodocs.AppConfiguration
 import com.oleg.photodocs.BuildConfig
 import com.oleg.photodocs.cache.DiskLruCache
 import com.oleg.photodocs.data.datasource.LoginCacheDataSource
@@ -61,8 +62,6 @@ private const val DEV_URL = BuildConfig.DEV_URL
 private const val PROD_URL = BuildConfig.PROD_URL
 
 
-private val retrofit: Retrofit = createNetworkClient(DEV_URL, BuildConfig.DEBUG)
-
-private val loginApi: LoginApi = retrofit.create(LoginApi::class.java)
+private val loginApi: LoginApi = AppConfiguration.api
 
 private const val LOGIN_CACHE = "LOGIN_CACHE"
