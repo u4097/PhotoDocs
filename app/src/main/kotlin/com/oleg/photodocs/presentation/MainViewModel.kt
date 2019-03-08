@@ -35,7 +35,7 @@ class MainViewModel : ViewModel(), CoroutineScope {
         launch {
 
             Timber.v("Fetching games list...")
-            val api: LoginApi = AppConfiguration.api
+//            val api: LoginApi = AppConfiguration.api
 
             try {
 //                val response: LoginResponse = api.loginAsync().await()

@@ -63,22 +63,16 @@ object AppConfiguration {
     private val httpLogger by lazy { HttpLogger(app) }
     private val debugRetrofitConfig by lazy { DebugRetrofitConfig(app, endpoints, networkBehavior) }
     private val retrofit by lazy { createNetworkClient() }
+    private val mockRetrofit by lazy { MockRetrofit.Builder(retrofit).networkBehavior(networkBehavior).build() }
 
 
-    val api: LoginApi by lazy { createApi() }
 
-
-    private fun createApi(): LoginApi {
-
-        val currentEndpoint: Endpoint = debugRetrofitConfig.currentEndpoint
-
-        if (currentEndpoint.isMock) {
-            val mockRetrofit = MockRetrofit.Builder(retrofit).networkBehavior(networkBehavior).build()
-            return MockRemoteApi(mockRetrofit)
+     fun createLoginApi(): LoginApi =
+        if (debugRetrofitConfig.currentEndpoint.isMock) {
+            MockRemoteApi(mockRetrofit)
+        } else {
+            retrofit.create<LoginApi>(LoginApi::class.java)
         }
-
-        return retrofit.create<LoginApi>(LoginApi::class.java)
-    }
 
 
     fun getRootViewContainerFor(activity: Activity): ViewGroup {

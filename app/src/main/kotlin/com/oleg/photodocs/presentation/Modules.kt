@@ -62,6 +62,7 @@ private const val DEV_URL = BuildConfig.DEV_URL
 private const val PROD_URL = BuildConfig.PROD_URL
 
 
-private val loginApi: LoginApi = AppConfiguration.api
+private val loginApi: LoginApi = AppConfiguration.createLoginApi()
+
 
 private const val LOGIN_CACHE = "LOGIN_CACHE"
