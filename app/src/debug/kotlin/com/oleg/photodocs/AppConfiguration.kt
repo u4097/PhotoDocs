@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
 import au.com.gridstone.debugdrawer.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.oleg.photodocs.networking.HttpConfiguration
-import com.oleg.photodocs.networking.HttpConfiguration.API_URL
+import com.oleg.photodocs.networking.DocumentApi
 import com.oleg.photodocs.networking.LoginApi
 import com.oleg.photodocs.pref.PrefUtils
 import com.oleg.photodocs.presentation.utils.debugdrawer.VersionInfoModule
@@ -62,7 +61,7 @@ object AppConfiguration {
 
     private val endpoints = listOf(
         Endpoint("Mock", "http://localhost/mock/", isMock = true),
-        Endpoint("Production", API_URL, isMock = false)
+        Endpoint("Develop", BuildConfig.DEV_URL, isMock = false)
     )
 
 
@@ -76,10 +75,18 @@ object AppConfiguration {
 
      fun createLoginApi(): LoginApi =
         if (debugRetrofitConfig.currentEndpoint.isMock) {
-            MockRemoteApi(mockRetrofit)
+            MockLoginApi(mockRetrofit)
         } else {
             retrofit.create<LoginApi>(LoginApi::class.java)
         }
+
+    fun createDocumentApi(): DocumentApi =
+        if (debugRetrofitConfig.currentEndpoint.isMock) {
+            MockDocumentApi(mockRetrofit)
+        } else {
+            retrofit.create<DocumentApi>(DocumentApi::class.java)
+        }
+
 
 
     fun getRootViewContainerFor(activity: Activity): ViewGroup {

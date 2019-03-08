@@ -1,21 +1,22 @@
 package com.oleg.photodocs.data.datasource
 
 import com.oleg.photodocs.data.repository.resouces.Resource
+import com.oleg.photodocs.datasource.model.DocumentEntity
 import com.oleg.photodocs.datasource.model.LoginEntity
 import com.oleg.photodocs.presentation.LoginResponse
 import kotlinx.coroutines.Deferred
 
 
-interface LoginCacheDataSource {
+interface DocumentCacheDataSource {
 
     fun get(): Deferred<String>
 
-    fun set(token: String?): Deferred<String>
+    fun set(documents: List<DocumentEntity>): Deferred<String>
 
 }
 
-interface LoginRemoteDataSource {
+interface DocumentRemoteDataSource {
 
-    suspend fun get(loginModel: LoginEntity): Resource<LoginResponse>?
+    suspend fun get(): Resource<List<DocumentEntity>>?
 
 }

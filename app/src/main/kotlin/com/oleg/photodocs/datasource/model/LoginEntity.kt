@@ -1,4 +1,4 @@
-package com.oleg.photodocs.datasource.model.login
+package com.oleg.photodocs.datasource.model
 
 import com.oleg.photodocs.domain.model.login.LoginModel
 import com.squareup.moshi.Json

@@ -15,14 +15,17 @@ import com.oleg.photodocs.R
 import com.oleg.photodocs.data.repository.resouces.ResourceState
 import com.oleg.photodocs.pref.PrefUtils
 import com.oleg.photodocs.presentation.model.login.Login
+import com.oleg.photodocs.presentation.viewmodel.DocumentViewModel
 import com.oleg.photodocs.presentation.viewmodel.LoginViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.games_list.*
 import org.koin.androidx.viewmodel.ext.viewModel
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
-    private val mVm: LoginViewModel by viewModel()
+    private val mLoginVm: LoginViewModel by viewModel()
+    private val mDocumentVm: DocumentViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // Observe ViewModel state and change UI accordingly.
-        mVm.loginResponse.observe(this@MainActivity, Observer {
+        mLoginVm.loginResponse.observe(this@MainActivity, Observer {
             it?.let {
                 when (it.state) {
                     ResourceState.LOADING -> viewAnimator.displayedChild = 0
@@ -63,8 +66,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
-        mVm.token.observe(this@MainActivity, Observer {
+        mDocumentVm.documents.observe(this@MainActivity, Observer {
             it?.let {
                 when (it.state) {
                     ResourceState.LOADING -> viewAnimator.displayedChild = 0
@@ -74,7 +76,26 @@ class MainActivity : AppCompatActivity() {
                         Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
                     }
                     ResourceState.SUCCESS -> {
-                        token_tv.text = "toke: ${it.data}"
+                        Timber.d("Document list size: ${it.data?.size}")
+                        viewAnimator.displayedChild = 2
+
+                    }
+                }
+            }
+        })
+
+
+        mLoginVm.token.observe(this@MainActivity, Observer {
+            it?.let {
+                when (it.state) {
+                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
+                    ResourceState.ERROR -> {
+                        viewAnimator.displayedChild = 1
+                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
+                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
+                    }
+                    ResourceState.SUCCESS -> {
+                        token_tv.text = "token: ${it.data}"
                         viewAnimator.displayedChild = 2
 
                     }
@@ -86,8 +107,8 @@ class MainActivity : AppCompatActivity() {
         // Put refresh button in toolbar menu and have it refresh the games list.
         toolbar.inflateMenu(R.menu.home)
         toolbar.setOnMenuItemClickListener {
-//            mVm.login(Login(login = "Admin", password = "admin2018"))
-             mVm.getToken()
+//            mLoginVm.login(Login(login = "Admin", password = "admin2018"))
+             mLoginVm.getToken()
             return@setOnMenuItemClickListener true
         }
 
@@ -95,7 +116,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        mVm.login(Login(login = "Admin", password = "admin2018"))
+        mLoginVm.login(Login(login = "Admin", password = "admin2018"))
+        mDocumentVm.getDocuments()
     }
 
 

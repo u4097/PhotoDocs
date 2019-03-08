@@ -1,6 +1,6 @@
 package com.oleg.photodocs.domain.model.login
 
-import com.oleg.photodocs.datasource.model.login.LoginEntity
+import com.oleg.photodocs.datasource.model.LoginEntity
 
 data class LoginModel(
     val login: String? = "NoName",
@@ -8,7 +8,8 @@ data class LoginModel(
 )
 
 
-fun LoginModel.mapToDataSource(): LoginEntity = LoginEntity(
-    login = this.login,
-    password = this.password
-)
+fun LoginModel.mapToDataSource(): LoginEntity =
+    LoginEntity(
+        login = this.login,
+        password = this.password
+    )
