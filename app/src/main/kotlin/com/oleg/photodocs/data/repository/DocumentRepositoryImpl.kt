@@ -18,13 +18,15 @@ class DocumentRepositoryImpl constructor(
 
     override suspend fun get(refresh: Boolean): Resource<List<DocumentModel>>? {
         when (refresh) {
-           true -> {
-               val documents = remoteDataSource.get()
-               cacheDataSource.set(documents = documents?.data!!)
-               return documents.mapToDomain()
-           }
+            true -> {
+                val documents = remoteDataSource.get()
+                // Save to cache
+                cacheDataSource.set(documents = documents?.data!!)
+                return documents.mapToDomain()
+            }
         }
         var documentList: List<DocumentEntity>?
+        // Get from cache
         var response = cacheDataSource.get()
         response.await().let {
             documentList = it
@@ -40,6 +42,7 @@ class DocumentRepositoryImpl constructor(
         Timber.d("Save document into cache: ${documents?.data}")
         documents?.data?.let {
             try {
+                // Save to cache
                 cacheDataSource.set(documents = documents.data)
             } catch (e: Exception) {
                 Timber.e("Can't save document into cache: ${e.stackTrace}")
