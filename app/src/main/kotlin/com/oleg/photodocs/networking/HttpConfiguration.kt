@@ -9,7 +9,6 @@ import okhttp3.Response
 
 object HttpConfiguration {
 
-  private const val API_KEY = "8ca8e06cb445b8c055442108161848001a1c66fc"
   const val API_URL = "http://185.244.173.11/v0/"
 
   val client: OkHttpClient = OkHttpClient.Builder()
@@ -20,7 +19,6 @@ object HttpConfiguration {
 
     override fun intercept(chain: Chain): Response {
       val url: HttpUrl = chain.request().url().newBuilder()
-          .addQueryParameter("api_key", API_KEY)
           .build()
 
       val request: Request = chain.request().newBuilder()
