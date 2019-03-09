@@ -2,7 +2,6 @@ package com.oleg.photodocs
 
 import com.oleg.photodocs.datasource.model.DocumentEntity
 import com.oleg.photodocs.networking.DocumentApi
-import com.oleg.photodocs.presentation.LoginResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.mock.BehaviorDelegate

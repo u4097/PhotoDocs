@@ -2,7 +2,7 @@ package com.oleg.photodocs
 
 import com.oleg.photodocs.datasource.model.LoginEntity
 import com.oleg.photodocs.networking.LoginApi
-import com.oleg.photodocs.presentation.LoginResponse
+import com.oleg.photodocs.datasource.model.LoginResponseEntity
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.mock.BehaviorDelegate
@@ -13,8 +13,8 @@ class MockLoginApi(mockRetrofit: MockRetrofit) : LoginApi {
     private val delegate: BehaviorDelegate<LoginApi> =
         mockRetrofit.create(LoginApi::class.java)
 
-    override fun loginAsync(loginEntity: LoginEntity): Deferred<Response<LoginResponse>> {
-        val response = LoginResponse(token)
+    override fun loginAsync(loginEntity: LoginEntity): Deferred<Response<LoginResponseEntity>> {
+        val response = LoginResponseEntity(token)
         return delegate.returningResponse(response).loginAsync(loginEntity)
     }
 

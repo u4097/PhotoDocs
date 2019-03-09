@@ -7,7 +7,7 @@ import com.oleg.photodocs.data.repository.resouces.ResourceState
 import com.oleg.photodocs.domain.model.login.LoginModel
 import com.oleg.photodocs.domain.model.login.mapToDataSource
 import com.oleg.photodocs.domain.repository.LoginRepository
-import com.oleg.photodocs.presentation.LoginResponse
+import com.oleg.photodocs.datasource.model.LoginResponseEntity
 
 class LoginRepositoryImpl constructor(
     private val cacheDataSource: LoginCacheDataSource,
@@ -31,7 +31,7 @@ class LoginRepositoryImpl constructor(
     }
 
 
-        override suspend fun get(loginModel: LoginModel): Resource<LoginResponse>? {
+        override suspend fun get(loginModel: LoginModel): Resource<LoginResponseEntity>? {
             val loginResponse = remoteDataSource.get(loginModel.mapToDataSource())
             cacheDataSource.set(loginResponse?.data?.token)
             return loginResponse

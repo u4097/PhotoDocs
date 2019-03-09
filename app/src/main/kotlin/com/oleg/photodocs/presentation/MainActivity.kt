@@ -13,6 +13,7 @@ import com.oleg.photodocs.AppConfiguration.getRootViewContainerFor
 import com.oleg.photodocs.AppConfiguration.riseAndShine
 import com.oleg.photodocs.R
 import com.oleg.photodocs.data.repository.resouces.ResourceState
+import com.oleg.photodocs.di.injectAppModules
 import com.oleg.photodocs.pref.PrefUtils
 import com.oleg.photodocs.presentation.model.login.Login
 import com.oleg.photodocs.presentation.viewmodel.DocumentViewModel
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         container.addView(home)
 
         // Koin  DI init
-        injectFeature()
+        injectAppModules()
 
         // Wake up activity in devices on run
         riseAndShine(this)

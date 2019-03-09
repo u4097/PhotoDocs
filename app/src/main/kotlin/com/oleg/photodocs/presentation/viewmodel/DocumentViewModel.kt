@@ -4,11 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.oleg.photodocs.data.repository.resouces.Resource
 import com.oleg.photodocs.domain.model.mapToPresentation
 import com.oleg.photodocs.domain.usecases.DocumentUseCase
-import com.oleg.photodocs.domain.usecases.LoginUseCase
-import com.oleg.photodocs.presentation.LoginResponse
 import com.oleg.photodocs.presentation.model.Document
-import com.oleg.photodocs.presentation.model.login.Login
-import com.oleg.photodocs.presentation.model.login.mapToDomain
 import com.oleg.photodocs.presentation.utils.livedata.SingleLiveEvent
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext

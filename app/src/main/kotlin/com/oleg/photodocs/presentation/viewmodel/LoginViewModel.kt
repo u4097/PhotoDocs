@@ -3,7 +3,7 @@ package com.oleg.photodocs.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import com.oleg.photodocs.data.repository.resouces.Resource
 import com.oleg.photodocs.domain.usecases.LoginUseCase
-import com.oleg.photodocs.presentation.LoginResponse
+import com.oleg.photodocs.datasource.model.LoginResponseEntity
 import com.oleg.photodocs.presentation.model.login.Login
 import com.oleg.photodocs.presentation.model.login.mapToDomain
 import com.oleg.photodocs.presentation.utils.livedata.SingleLiveEvent
@@ -28,7 +28,7 @@ class LoginViewModel constructor(val loginUseCase: LoginUseCase) : ViewModel() {
     private val scope = CoroutineScope(coroutineContext)
 
 
-    val loginResponse = SingleLiveEvent<Resource<LoginResponse>>()
+    val loginResponse = SingleLiveEvent<Resource<LoginResponseEntity>>()
 
     val token = SingleLiveEvent<Resource<String>>()
 

@@ -72,82 +72,101 @@ object Versions {
     const val robolectric = "3.8"
 
     const val layercache = "0.4.0"
+
+    const val mockito = "2.8.47"
 }
 
 
 object Libraries {
 
+    // CORE
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     const val androidx = "androidx.appcompat:appcompat:${Versions.androidx}"
     const val ktx = "androidx.core:core-ktx:${Versions.ktx}"
     const val lifecycle = "android.arch.lifecycle:extensions:${Versions.lifecycle}"
 
+    // NAVIGATION
     const val navigationFragment = "android.arch.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navigationUI = "android.arch.navigation:navigation-ui-ktx:${Versions.navigation}"
 
-
+    // CONSTRAINT LAYOUT
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-    const val fresco = "com.facebook.fresco:fresco:${Versions.fresco}"
 
-    const val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
-    const val decoro = "ru.tinkoff.decoro:decoro:${Versions.decoro}"
-    const val showhidepasswordedittext =
-        "com.github.scottyab:showhidepasswordedittext:${Versions.showhidepasswordedittext}"
+    // KOIN
+    const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
+    const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 
+    // RETROFIT
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
     const val retrofitCoroutines =
         "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.coroutinesRetrofit}"
 
+    // COROUTINES
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val coroutinesKotlinAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
+    // OKHTTP
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
     const val okhttpLoging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
 
+    // ANKO
     const val anko = "org.jetbrains.anko:anko:${Versions.anko}"
 
+    // TIMBER
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+
+    // FIREBASE
     const val fireBase = "com.google.firebase:firebase-core:${Versions.firebase}"
     const val fireBaseMessaging = "com.google.firebase:firebase-messaging:${Versions.firebaseMessaging}"
 
+    // CHUCK
     const val chuck = "com.readystatesoftware.chuck:library:${Versions.chuck}"
     const val chuckRelease = "com.readystatesoftware.chuck:library-no-op:${Versions.chuck}"
 
+    // LEAK CANARY
     const val leakCanaryAndroid = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
     const val leakCanaryAndroidNoOp = "com.squareup.leakcanary:leakcanary-android-no-op:${Versions.leakCanary}"
 
-    const val leakCanaryAndroidSupportFragment =
-        "com.squareup.leakcanary:leakcanary-support-fragment:${Versions.leakCanary}"
-
-    const val rxpaper = "com.github.pakoito:RxPaper2:${Versions.rxpaper}"
-
-    const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
-    const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
-
+    // PICASSO
+    const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+    // FRESCO
+    const val fresco = "com.facebook.fresco:fresco:${Versions.fresco}"
+    // MATERIAL DIALOG
     const val materialDialog = "com.afollestad.material-dialogs:core:${Versions.materialDialog}"
 
-    const val materialDesign = "com.google.android.material:material:${Versions.materialDisign}"
 
+    // DEBUG DRAWER
     const val debugDrawer = "au.com.gridstone.debugdrawer:debugdrawer:${Versions.debugDrawer}"
     const val debugDrawerLeak = "au.com.gridstone.debugdrawer:debugdrawer-leakcanary:${Versions.debugDrawer}"
     const val debugDrawerRetrofit = "au.com.gridstone.debugdrawer:debugdrawer-retrofit:${Versions.debugDrawer}"
     const val debugDrawerTimber = "au.com.gridstone.debugdrawer:debugdrawer-timber:${Versions.debugDrawer}"
     const val debugDrawerOkHTTP = "au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:${Versions.debugDrawer}"
-    const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
 
+
+    // CACHE
     const val layercache = "com.appmattus:layercache:${Versions.layercache}"
     const val layercacheAndroid = "com.appmattus:layercache-android:${Versions.layercache}"
     const val layercacheLiveData = "com.appmattus:layercache-android-livedata:${Versions.layercache}"
 
-    // MOCK WEB SERVER
-    const val mockwebserver = "com.squareup.okhttp:mockwebserver:${Versions.mockwebserver}"
+
     // CORE TESTING
     const val androidArchTest = "android.arch.core:core-testing:${Versions.androidArchTest}"
+
+    // MOCKITO
+    const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
+
+    // MOCK WEB SERVER
+    const val mockwebserver = "com.squareup.okhttp:mockwebserver:${Versions.mockwebserver}"
+
     // ROBOLECTRIC
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
 
-    const val kotlinTest =  "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
+    // KOTLIN TEST
+    const val kotlinTest = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
+
+    // KOIN TEST
+    const val koinTest = "org.koin:koin-test:${Versions.koin}"
 }
 
 

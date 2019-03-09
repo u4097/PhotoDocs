@@ -98,6 +98,8 @@ dependencies {
 
     /** Kotlin */
     implementation(Libraries.kotlin)
+    // Coroutines
+    implementation(Libraries.coroutinesKotlinAndroid)
 
     implementation(Libraries.androidx)
     implementation(Libraries.ktx)
@@ -111,10 +113,7 @@ dependencies {
     implementation(Libraries.navigationFragment)
     implementation(Libraries.navigationUI)
 
-
     /** Networkin */
-    // Coroutines
-    implementation(Libraries.coroutinesKotlinAndroid)
 
     // Retrofit
     implementation(Libraries.retrofit)
@@ -134,7 +133,6 @@ dependencies {
     /** DI */
     implementation(Libraries.koinAndroid)
     implementation( Libraries.koinViewModel)
-
 
 
     /** Design */
@@ -161,14 +159,16 @@ dependencies {
     debugImplementation (Libraries.leakCanaryAndroid)
     releaseImplementation (Libraries.leakCanaryAndroidNoOp)
 
-    // material dialog
+    // Material Dialog
     implementation(Libraries.materialDialog)
 
     // TEST
+    testImplementation(Libraries.mockito)
     testImplementation(Libraries.mockwebserver)
+    testImplementation(Libraries.kotlinTest)
+    testImplementation(Libraries.koinTest)
     testImplementation(Libraries.androidArchTest)
     testImplementation(Libraries.robolectric)
-    testImplementation(Libraries.kotlinTest)
 
     testImplementation ("junit:junit:4.12")
     testImplementation("androidx.test.ext:junit:1.1.0")

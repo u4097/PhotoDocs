@@ -2,8 +2,10 @@ package com.oleg.photodocs
 
 import android.app.Application
 import au.com.gridstone.debugdrawer.LumberYard
+import com.oleg.photodocs.AppConfiguration.remoteDataSource
 import com.squareup.leakcanary.LeakCanary
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import timber.log.Timber
 import java.io.File
@@ -24,13 +26,15 @@ class App : Application() {
         LeakCanary.install(this)
 
         LumberYard.install(this)
-        AppConfiguration.init(this)
 
         this.dirForCache = File(getRootAppDir())
 
         // Unique initialization of Dependency Injection library to allow the use of application context
         startKoin { androidContext(this@App) }
 
+        loadKoinModules(remoteDataSource)
+
+//        AppConfiguration.init(this)
     }
 
     private fun getRootAppDir(): String? {

@@ -3,8 +3,7 @@ package com.oleg.photodocs.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.oleg.photodocs.AppConfiguration
-import com.oleg.photodocs.networking.LoginApi
+import com.oleg.photodocs.datasource.model.LoginResponseEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -56,6 +55,6 @@ class MainViewModel : ViewModel(), CoroutineScope {
         object Idle : State()
         object Error : State()
         object Loading : State()
-        data class Success(val response: LoginResponse) : State()
+        data class Success(val response: LoginResponseEntity) : State()
     }
 }

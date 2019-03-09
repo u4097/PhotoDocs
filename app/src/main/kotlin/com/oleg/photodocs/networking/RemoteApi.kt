@@ -2,7 +2,7 @@ package com.oleg.photodocs.networking
 
 import com.oleg.photodocs.datasource.model.DocumentEntity
 import com.oleg.photodocs.datasource.model.LoginEntity
-import com.oleg.photodocs.presentation.LoginResponse
+import com.oleg.photodocs.datasource.model.LoginResponseEntity
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.Body
@@ -19,7 +19,7 @@ interface LoginApi {
     @POST("auth/login/")
     fun loginAsync(
         @Body loginEntity: LoginEntity
-    ): Deferred <Response<LoginResponse>>
+    ): Deferred <Response<LoginResponseEntity>>
 }
 
 interface DocumentApi {

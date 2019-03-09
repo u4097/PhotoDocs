@@ -2,7 +2,6 @@ package com.oleg.photodocs.datasource.cache
 
 import com.oleg.photodocs.cache.AppCache
 import com.oleg.photodocs.data.datasource.LoginCacheDataSource
-import com.oleg.photodocs.presentation.LoginResponse
 import kotlinx.coroutines.Deferred
 
 
