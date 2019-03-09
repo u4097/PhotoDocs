@@ -13,6 +13,7 @@ import com.oleg.photodocs.AppConfiguration.DatasourceProperties.DEV_URL
 import com.oleg.photodocs.AppConfiguration.DatasourceProperties.MOCK_URL
 import com.oleg.photodocs.networking.DocumentApi
 import com.oleg.photodocs.networking.LoginApi
+import com.oleg.photodocs.networking.SuitApi
 import com.oleg.photodocs.pref.PrefUtils
 import com.oleg.photodocs.presentation.utils.debugdrawer.VersionInfoModule
 import com.readystatesoftware.chuck.ChuckInterceptor
@@ -27,15 +28,21 @@ import retrofit2.mock.MockRetrofit
 import retrofit2.mock.NetworkBehavior
 import java.util.concurrent.TimeUnit
 
-/** Init debug drawer configuration class */
+/** Init Network and debug drawer configuration class */
 
 object AppConfiguration : KoinComponent {
+    private val httpLogger by inject<HttpLogger>()
+    private val debugRetrofitConfig by inject<DebugRetrofitConfig>()
+    private val retrofit by inject<Retrofit>()
+    private val mockRetrofit by inject<MockRetrofit>()
+
     object DatasourceProperties {
         const val MOCK_URL = "http://localhost/mock/"
         const val DEV_URL = "http://185.244.173.11/v0/"
     }
 
 
+    // Network module
     val remoteDataSource = module {
         single { HttpLogger(get()) }
         single { NetworkBehavior.create() }
@@ -49,7 +56,7 @@ object AppConfiguration : KoinComponent {
                 get()
             )
         }
-        single { OkHttpClient() }
+        single { httpClient() }
         single { retrofitClient(get()) }
         single {
             MockRetrofit.Builder(get()).networkBehavior(get()).build()
@@ -57,13 +64,7 @@ object AppConfiguration : KoinComponent {
     }
 
 
-
-    private val httpLogger by inject<HttpLogger>()
-    private val debugRetrofitConfig by inject<DebugRetrofitConfig>()
-    private val retrofit by inject<Retrofit>()
-    private val mockRetrofit by inject<MockRetrofit>()
-
-
+    // OkHTTP Client
     private fun httpClient(): OkHttpClient {
         // Logging Interceptor
         val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
@@ -85,6 +86,7 @@ object AppConfiguration : KoinComponent {
         return clientBuilder.build()
     }
 
+    // Retrofit
     private fun retrofitClient(httpClient: OkHttpClient): Retrofit {
         val currentEndpoint: Endpoint = debugRetrofitConfig.currentEndpoint
         return Retrofit.Builder()
@@ -96,6 +98,7 @@ object AppConfiguration : KoinComponent {
 
     }
 
+    // API Services
     fun createLoginApi(): LoginApi =
         if (debugRetrofitConfig.currentEndpoint.isMock) {
             MockLoginApi(mockRetrofit)
@@ -110,7 +113,14 @@ object AppConfiguration : KoinComponent {
             retrofit.create<DocumentApi>(DocumentApi::class.java)
         }
 
+    fun createSuitApi(): SuitApi =
+        if (debugRetrofitConfig.currentEndpoint.isMock) {
+            MockSuitApi(mockRetrofit)
+        } else {
+            retrofit.create<SuitApi>(SuitApi::class.java)
+        }
 
+    // Debug Drawer SetUp
     fun getRootViewContainerFor(activity: Activity): ViewGroup {
         return DebugDrawer.with(activity)
             .addSectionTitle("Network")

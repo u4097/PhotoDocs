@@ -1,6 +1,6 @@
 package com.oleg.photodocs.presentation.viewmodel
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
 import com.oleg.photodocs.data.repository.resouces.Resource
 import com.oleg.photodocs.domain.usecases.LoginUseCase
 import com.oleg.photodocs.datasource.model.LoginResponseEntity
@@ -8,7 +8,6 @@ import com.oleg.photodocs.presentation.model.login.Login
 import com.oleg.photodocs.presentation.model.login.mapToDomain
 import com.oleg.photodocs.presentation.utils.livedata.SingleLiveEvent
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by Oleg Sitnikov
@@ -17,41 +16,25 @@ import kotlin.coroutines.CoroutineContext
  */
 
 
-class LoginViewModel constructor(val loginUseCase: LoginUseCase) : ViewModel() {
+class LoginViewModel constructor(val loginUseCase: LoginUseCase) : AbstractViewModel() {
 
+    val loginEventResponse = SingleLiveEvent<Resource<LoginResponseEntity>>()
 
-    private val parentJob = Job()
-
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Default
-
-    private val scope = CoroutineScope(coroutineContext)
-
-
-    val loginResponse = SingleLiveEvent<Resource<LoginResponseEntity>>()
-
-    val token = SingleLiveEvent<Resource<String>>()
+    val tokenData = MutableLiveData<Resource<String>>()
 
     fun getToken() {
         scope.launch {
             val response = loginUseCase.getToken()
-            token.postValue(response)
+            tokenData.postValue(response)
         }
     }
 
     fun login(login: Login) {
         scope.launch {
             val response = loginUseCase.get(loginModel = login.mapToDomain())
-            loginResponse.postValue(response)
+            loginEventResponse.postValue(response)
         }
     }
 
-
-    private fun cancelAllRequests() = coroutineContext.cancel()
-
-    override fun onCleared() {
-        super.onCleared()
-        cancelAllRequests()
-    }
 
 }

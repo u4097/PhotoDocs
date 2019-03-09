@@ -16,34 +16,15 @@ import kotlin.coroutines.CoroutineContext
  */
 
 
-class DocumentViewModel constructor(val documentUseCase: DocumentUseCase) : ViewModel() {
-
-
-    private val parentJob = Job()
-
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Default
-
-    private val scope = CoroutineScope(coroutineContext)
-
+class DocumentViewModel constructor(val documentUseCase: DocumentUseCase) : AbstractViewModel() {
 
     val documents = SingleLiveEvent<Resource<List<Document>>>()
-
-
 
     fun getDocuments(refresh: Boolean) {
         scope.launch {
             val response = documentUseCase.get(refresh)
             documents.postValue(response?.mapToPresentation())
         }
-    }
-
-
-    private fun cancelAllRequests() = coroutineContext.cancel()
-
-    override fun onCleared() {
-        super.onCleared()
-        cancelAllRequests()
     }
 
 }
