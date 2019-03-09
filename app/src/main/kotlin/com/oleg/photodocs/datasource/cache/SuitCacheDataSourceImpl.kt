@@ -10,10 +10,10 @@ import kotlinx.coroutines.Deferred
 class SuitCacheDataSourceImpl constructor(
     private val cache: AppCache<List<SuitEntity>>
 ) : SuitCacheDataSource {
-    val key = "document"
+    val key = "suit"
 
-    override fun set(documents: List<SuitEntity>): Deferred<List<SuitEntity>> {
-        return cache.save(key, documents)
+    override fun set(suits: List<SuitEntity>): Deferred<List<SuitEntity>> {
+        return cache.save(key, suits)
     }
 
     override fun get(): Deferred<List<SuitEntity>> =

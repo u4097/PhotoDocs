@@ -39,7 +39,7 @@ class DocumentRepositoryImpl constructor(
         }
 
         val documents = remoteDataSource.get()
-        Timber.d("Save document into cache: ${documents?.data}")
+        Timber.d("Get document from server:\n ${documents?.data}")
         documents?.data?.let {
             try {
                 // Save to cache

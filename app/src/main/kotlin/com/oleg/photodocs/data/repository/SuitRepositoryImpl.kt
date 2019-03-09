@@ -39,7 +39,7 @@ class SuitRepositoryImpl constructor(
         }
 
         val suits = remoteDataSource.get()
-        Timber.d("Save suit into cache:\n ${suits?.data}")
+        Timber.d("Get suit from server:\n${suits?.data}")
         suits?.data?.let {
             try {
                 // Save to cache

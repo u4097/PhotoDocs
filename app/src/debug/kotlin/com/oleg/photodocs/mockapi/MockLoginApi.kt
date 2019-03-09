@@ -1,4 +1,4 @@
-package com.oleg.photodocs
+package com.oleg.photodocs.mockapi
 
 import com.oleg.photodocs.datasource.model.LoginEntity
 import com.oleg.photodocs.networking.LoginApi

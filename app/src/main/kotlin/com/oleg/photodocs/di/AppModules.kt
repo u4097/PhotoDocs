@@ -6,27 +6,35 @@ import com.oleg.photodocs.BuildConfig
 import com.oleg.photodocs.cache.DiskLruCache
 import com.oleg.photodocs.cache.LruCache
 import com.oleg.photodocs.data.datasource.*
+import com.oleg.photodocs.data.repository.BackgroundRepositoryImpl
 import com.oleg.photodocs.data.repository.DocumentRepositoryImpl
 import com.oleg.photodocs.data.repository.LoginRepositoryImpl
 import com.oleg.photodocs.data.repository.SuitRepositoryImpl
+import com.oleg.photodocs.datasource.cache.BackgroundCacheDataSourceImpl
 import com.oleg.photodocs.datasource.cache.DocumentCacheDataSourceImpl
 import com.oleg.photodocs.datasource.cache.LoginCacheDataSourceImpl
 import com.oleg.photodocs.datasource.cache.SuitCacheDataSourceImpl
+import com.oleg.photodocs.datasource.model.BackgroundEntity
 import com.oleg.photodocs.datasource.model.DocumentEntity
 import com.oleg.photodocs.datasource.model.LoginResponseEntity
 import com.oleg.photodocs.datasource.model.SuitEntity
+import com.oleg.photodocs.datasource.remote.BackgroundRemoteDataSourceImpl
 import com.oleg.photodocs.datasource.remote.DocumentRemoteDataSourceImpl
 import com.oleg.photodocs.datasource.remote.LoginRemoteDataSourceImpl
 import com.oleg.photodocs.datasource.remote.SuitRemoteDataSourceImpl
+import com.oleg.photodocs.domain.repository.BackgroundRepository
 import com.oleg.photodocs.domain.repository.DocumentRepository
 import com.oleg.photodocs.domain.repository.LoginRepository
 import com.oleg.photodocs.domain.repository.SuitRepository
+import com.oleg.photodocs.domain.usecases.BackgroundUseCase
 import com.oleg.photodocs.domain.usecases.DocumentUseCase
 import com.oleg.photodocs.domain.usecases.LoginUseCase
 import com.oleg.photodocs.domain.usecases.SuitUseCase
+import com.oleg.photodocs.networking.BackgroundApi
 import com.oleg.photodocs.networking.DocumentApi
 import com.oleg.photodocs.networking.LoginApi
 import com.oleg.photodocs.networking.SuitApi
+import com.oleg.photodocs.presentation.viewmodel.BackgroundViewModel
 import com.oleg.photodocs.presentation.viewmodel.DocumentViewModel
 import com.oleg.photodocs.presentation.viewmodel.LoginViewModel
 import com.oleg.photodocs.presentation.viewmodel.SuitViewModel
@@ -52,7 +60,8 @@ private val loadModules by lazy {
 val viewModelModule: Module = module {
     viewModel { LoginViewModel(loginUseCase = get()) }
     viewModel { DocumentViewModel(documentUseCase = get()) }
-    viewModel { SuitViewModel(documentUseCase = get()) }
+    viewModel { SuitViewModel(suitUseCase = get()) }
+    viewModel { BackgroundViewModel(backgroundUseCase = get()) }
 }
 
 // USE CASES
@@ -60,6 +69,7 @@ val useCaseModule: Module = module {
     factory { LoginUseCase(loginRepository = get()) }
     factory { DocumentUseCase(documentRepository = get()) }
     factory { SuitUseCase(suitRepository = get()) }
+    factory { BackgroundUseCase(backgroundRepository = get()) }
 }
 
 // REPOSITORY
@@ -67,6 +77,7 @@ val repositoryModule: Module = module {
     single { LoginRepositoryImpl(cacheDataSource = get(), remoteDataSource = get()) as LoginRepository }
     single { DocumentRepositoryImpl(cacheDataSource = get(), remoteDataSource = get()) as DocumentRepository }
     single { SuitRepositoryImpl(cacheDataSource = get(), remoteDataSource = get()) as SuitRepository }
+    single { BackgroundRepositoryImpl(cacheDataSource = get(), remoteDataSource = get()) as BackgroundRepository }
 }
 
 // DATASOURCE (cache and remote)
@@ -83,28 +94,36 @@ val dataSourceModule: Module = module {
     single { SuitRemoteDataSourceImpl(api = suitApi) as SuitRemoteDataSource }
     single { SuitCacheDataSourceImpl(cache = get(DOCUMENT_CACHE)) as SuitCacheDataSource }
 
+    // Background
+    single { BackgroundRemoteDataSourceImpl(api = backgroundApi) as BackgroundRemoteDataSource }
+    single { BackgroundCacheDataSourceImpl(cache = get(BACKGROUND_CACHE)) as BackgroundCacheDataSource }
+
 }
 
 private val loginApi: LoginApi = AppConfiguration.createLoginApi()
 private val documentApi: DocumentApi = AppConfiguration.createDocumentApi()
 private val suitApi: SuitApi = AppConfiguration.createSuitApi()
+private val backgroundApi: BackgroundApi = AppConfiguration.createBackgroundApi()
 
 // NETWORK API
 val networkModule: Module = module {
     single { loginApi }
     single { documentApi }
     single { suitApi }
+    single { backgroundApi }
 }
 
 private const val LOGIN_CACHE = "LOGIN_CACHE"
 private const val DOCUMENT_CACHE = "DOCUMENT_CACHE"
 private const val SUIT_CACHE = "SUIT_CACHE"
+private const val BACKGROUND_CACHE = "BACKGROUND_CACHE"
 
 // CACHE
 val cacheModule: Module = module {
     single(name = LOGIN_CACHE) { DiskLruCache<LoginResponseEntity>(App.instance.dirForCache) }
     single(name = DOCUMENT_CACHE) { LruCache<List<DocumentEntity>>() }
     single(name = SUIT_CACHE) { LruCache<List<SuitEntity>>() }
+    single(name = BACKGROUND_CACHE) { LruCache<List<BackgroundEntity>>() }
 }
 
 

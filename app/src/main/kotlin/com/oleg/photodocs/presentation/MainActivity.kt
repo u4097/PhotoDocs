@@ -16,6 +16,7 @@ import com.oleg.photodocs.data.repository.resouces.ResourceState
 import com.oleg.photodocs.di.loadAppModules
 import com.oleg.photodocs.pref.PrefUtils
 import com.oleg.photodocs.presentation.model.login.Login
+import com.oleg.photodocs.presentation.viewmodel.BackgroundViewModel
 import com.oleg.photodocs.presentation.viewmodel.DocumentViewModel
 import com.oleg.photodocs.presentation.viewmodel.LoginViewModel
 import com.oleg.photodocs.presentation.viewmodel.SuitViewModel
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private val mLoginVm: LoginViewModel by viewModel()
     private val mDocumentVm: DocumentViewModel by viewModel()
     private val mSuitVm: SuitViewModel by viewModel()
+    private val mBackgroundVm: BackgroundViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,11 +113,33 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        // Background observer
+        mBackgroundVm.backgroundsData.observe(this@MainActivity, Observer {
+            it?.let {
+                when (it.state) {
+                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
+                    ResourceState.ERROR -> {
+                        viewAnimator.displayedChild = 1
+                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
+                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
+                    }
+                    ResourceState.SUCCESS -> {
+                        Timber.d("Background list size: ${it.data?.size}")
+                        token_tv.text = it.data?.toString()
+                        viewAnimator.displayedChild = 2
+
+                    }
+                }
+            }
+        })
+
+
 
         // Put refresh button in toolbar menu and have it refresh the games list.
         toolbar.inflateMenu(R.menu.home)
         toolbar.setOnMenuItemClickListener {
-            mSuitVm.getSuits(refresh = false)
+//            mSuitVm.getSuits(refresh = false)
+            mBackgroundVm.getBackgrounds(refresh = false)
             return@setOnMenuItemClickListener true
         }
 

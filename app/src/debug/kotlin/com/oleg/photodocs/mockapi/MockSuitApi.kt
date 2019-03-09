@@ -1,4 +1,4 @@
-package com.oleg.photodocs
+package com.oleg.photodocs.mockapi
 
 import com.oleg.photodocs.datasource.model.SuitEntity
 import com.oleg.photodocs.networking.SuitApi

@@ -1,7 +1,6 @@
 package com.oleg.photodocs
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context.POWER_SERVICE
 import android.os.PowerManager
 import android.os.PowerManager.*
@@ -11,6 +10,11 @@ import au.com.gridstone.debugdrawer.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.oleg.photodocs.AppConfiguration.DatasourceProperties.DEV_URL
 import com.oleg.photodocs.AppConfiguration.DatasourceProperties.MOCK_URL
+import com.oleg.photodocs.mockapi.MockBackgroundApi
+import com.oleg.photodocs.mockapi.MockDocumentApi
+import com.oleg.photodocs.mockapi.MockLoginApi
+import com.oleg.photodocs.mockapi.MockSuitApi
+import com.oleg.photodocs.networking.BackgroundApi
 import com.oleg.photodocs.networking.DocumentApi
 import com.oleg.photodocs.networking.LoginApi
 import com.oleg.photodocs.networking.SuitApi
@@ -118,6 +122,13 @@ object AppConfiguration : KoinComponent {
             MockSuitApi(mockRetrofit)
         } else {
             retrofit.create<SuitApi>(SuitApi::class.java)
+        }
+
+    fun createBackgroundApi(): BackgroundApi =
+        if (debugRetrofitConfig.currentEndpoint.isMock) {
+            MockBackgroundApi(mockRetrofit)
+        } else {
+            retrofit.create<BackgroundApi>(BackgroundApi::class.java)
         }
 
     // Debug Drawer SetUp

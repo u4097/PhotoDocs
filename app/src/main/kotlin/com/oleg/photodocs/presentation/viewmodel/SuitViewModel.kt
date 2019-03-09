@@ -14,14 +14,14 @@ import kotlinx.coroutines.launch
  */
 
 
-class SuitViewModel constructor(val documentUseCase: SuitUseCase) : AbstractViewModel() {
+class SuitViewModel constructor(val suitUseCase: SuitUseCase) : AbstractViewModel() {
 
     val suitsData = MutableLiveData<Resource<List<Suit>>>()
 
 
     fun getSuits(refresh: Boolean) {
         scope.launch {
-            val response = documentUseCase.get(refresh)
+            val response = suitUseCase.get(refresh)
             suitsData.postValue(response?.mapToPresentation())
         }
     }

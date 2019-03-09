@@ -1,9 +1,6 @@
 package com.oleg.photodocs.networking
 
-import com.oleg.photodocs.datasource.model.DocumentEntity
-import com.oleg.photodocs.datasource.model.LoginEntity
-import com.oleg.photodocs.datasource.model.LoginResponseEntity
-import com.oleg.photodocs.datasource.model.SuitEntity
+import com.oleg.photodocs.datasource.model.*
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.Body
@@ -31,4 +28,9 @@ interface DocumentApi {
 interface SuitApi {
     @GET("suit_types")
     fun getSuitAsync(): Deferred<Response<List<SuitEntity>>>
+}
+
+interface BackgroundApi {
+    @GET("backgrounds")
+    fun getBackgroundAsync(): Deferred<Response<List<BackgroundEntity>>>
 }
