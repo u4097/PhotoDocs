@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity(),
     }
 
 
-
     private val mLoginVm: LoginViewModel by viewModel()
     private val mDocumentVm: DocumentViewModel by viewModel()
     private val mSuitVm: SuitViewModel by viewModel()
@@ -83,8 +82,6 @@ class MainActivity : AppCompatActivity(),
         // Wire up navigation drawer to open on toolbar button clicks.
         val toolbar: Toolbar = findViewById(R.id.home_toolbar)
 
-//        val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
-
 //        Navigation
         mNavController = Navigation.findNavController(this, R.id.host_fragment)
 
@@ -97,86 +94,17 @@ class MainActivity : AppCompatActivity(),
         }
 
 
-        // Observe ViewModel state and change UI accordingly.
         mLoginVm.loginEventResponse.observe(this@MainActivity, Observer {
             it?.let {
                 when (it.state) {
-//                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
                     ResourceState.ERROR -> {
-//                        viewAnimator.displayedChild = 1
-//                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
-//                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
                     }
                     ResourceState.SUCCESS -> {
-//                        mDocumentVm.getDocuments(refresh = false)
                         PrefUtils.token = it.data?.token
-//                        token_tv.text = it.data?.token
-//                        viewAnimator.displayedChild = 2
                     }
                 }
             }
         })
-
-        // Document observer
-        mDocumentVm.documents.observe(this@MainActivity, Observer {
-            it?.let {
-                when (it.state) {
-//                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
-                    ResourceState.ERROR -> {
-//                        viewAnimator.displayedChild = 1
-//                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
-//                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
-                    }
-                    ResourceState.SUCCESS -> {
-                        Timber.d("Document list size: ${it.data?.size}")
-//                        token_tv.text = it.data?.toString()
-//                        viewAnimator.displayedChild = 2
-
-                    }
-                }
-            }
-        })
-
-        // Suit observer
-        mSuitVm.suitsData.observe(this@MainActivity, Observer {
-            it?.let {
-                when (it.state) {
-//                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
-                    ResourceState.ERROR -> {
-//                        viewAnimator.displayedChild = 1
-//                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
-//                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
-                    }
-                    ResourceState.SUCCESS -> {
-                        Timber.d("Suit list size: ${it.data?.size}")
-//                        token_tv.text = it.data?.toString()
-//                        viewAnimator.displayedChild = 2
-
-                    }
-                }
-            }
-        })
-
-        // Background observer
-        mBackgroundVm.backgroundsData.observe(this@MainActivity, Observer {
-            it?.let {
-                when (it.state) {
-//                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
-                    ResourceState.ERROR -> {
-//                        viewAnimator.displayedChild = 1
-//                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
-//                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
-                    }
-                    ResourceState.SUCCESS -> {
-                        Timber.d("Background list size: ${it.data?.size}")
-//                        token_tv.text = it.data?.toString()
-//                        viewAnimator.displayedChild = 2
-
-                    }
-                }
-            }
-        })
-
 
         // Put refresh button in toolbar menu and have it refresh the games list.
         toolbar.inflateMenu(R.menu.home)
