@@ -65,25 +65,13 @@
             android:orientation="vertical"
     >
         <TextView
-                android:id="@+id/title_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="150dp"
-                android:gravity="center"
-                 android:textSize="18sp"
-                android:layout_gravity="center_vertical"
-                android:text="Retrofit response"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        />
-        <TextView
                 android:id="@+id/token_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="24dp"
+                android:paddingTop="250dp"
                 android:gravity="center"
                 android:layout_gravity="center_vertical"
                 android:paddingHorizontal="8dp"
-                android:text="SDFA33344SDFASDFSDFADFADF"
                 tools:text="SDFA33344SDFASDFSDFADFADF"
         />
 

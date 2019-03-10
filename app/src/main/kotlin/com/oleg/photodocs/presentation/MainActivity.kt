@@ -1,11 +1,10 @@
 package com.oleg.photodocs.presentation
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ViewAnimator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
@@ -19,12 +18,13 @@ import com.oleg.photodocs.data.repository.resouces.ResourceState
 import com.oleg.photodocs.di.loadAppModules
 import com.oleg.photodocs.pref.PrefUtils
 import com.oleg.photodocs.presentation.model.login.Login
+import com.oleg.photodocs.presentation.splash.SplashFragmentDirections
+import com.oleg.photodocs.presentation.utils.visible
 import com.oleg.photodocs.presentation.viewmodel.BackgroundViewModel
 import com.oleg.photodocs.presentation.viewmodel.DocumentViewModel
 import com.oleg.photodocs.presentation.viewmodel.LoginViewModel
 import com.oleg.photodocs.presentation.viewmodel.SuitViewModel
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.games_list.*
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import timber.log.Timber
 
@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity(),
         Navigation.findNavController(this, R.id.host_fragment).navigate(action)
     }
 
+
+
     private val mLoginVm: LoginViewModel by viewModel()
     private val mDocumentVm: DocumentViewModel by viewModel()
     private val mSuitVm: SuitViewModel by viewModel()
@@ -71,6 +73,7 @@ class MainActivity : AppCompatActivity(),
         val home: View = LayoutInflater.from(this).inflate(R.layout.activity_main, container, false)
         container.addView(home)
 
+
         // Koin  DI init
         loadAppModules()
 
@@ -80,7 +83,7 @@ class MainActivity : AppCompatActivity(),
         // Wire up navigation drawer to open on toolbar button clicks.
         val toolbar: Toolbar = findViewById(R.id.home_toolbar)
 
-        val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
+//        val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
 
 //        Navigation
         mNavController = Navigation.findNavController(this, R.id.host_fragment)
@@ -98,17 +101,17 @@ class MainActivity : AppCompatActivity(),
         mLoginVm.loginEventResponse.observe(this@MainActivity, Observer {
             it?.let {
                 when (it.state) {
-                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
+//                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
                     ResourceState.ERROR -> {
-                        viewAnimator.displayedChild = 1
-                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
-                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
+//                        viewAnimator.displayedChild = 1
+//                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
+//                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
                     }
                     ResourceState.SUCCESS -> {
 //                        mDocumentVm.getDocuments(refresh = false)
                         PrefUtils.token = it.data?.token
-                        token_tv.text = it.data?.token
-                        viewAnimator.displayedChild = 2
+//                        token_tv.text = it.data?.token
+//                        viewAnimator.displayedChild = 2
                     }
                 }
             }
@@ -118,16 +121,16 @@ class MainActivity : AppCompatActivity(),
         mDocumentVm.documents.observe(this@MainActivity, Observer {
             it?.let {
                 when (it.state) {
-                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
+//                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
                     ResourceState.ERROR -> {
-                        viewAnimator.displayedChild = 1
-                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
-                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
+//                        viewAnimator.displayedChild = 1
+//                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
+//                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
                     }
                     ResourceState.SUCCESS -> {
                         Timber.d("Document list size: ${it.data?.size}")
-                        token_tv.text = it.data?.toString()
-                        viewAnimator.displayedChild = 2
+//                        token_tv.text = it.data?.toString()
+//                        viewAnimator.displayedChild = 2
 
                     }
                 }
@@ -138,16 +141,16 @@ class MainActivity : AppCompatActivity(),
         mSuitVm.suitsData.observe(this@MainActivity, Observer {
             it?.let {
                 when (it.state) {
-                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
+//                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
                     ResourceState.ERROR -> {
-                        viewAnimator.displayedChild = 1
-                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
-                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
+//                        viewAnimator.displayedChild = 1
+//                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
+//                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
                     }
                     ResourceState.SUCCESS -> {
                         Timber.d("Suit list size: ${it.data?.size}")
-                        token_tv.text = it.data?.toString()
-                        viewAnimator.displayedChild = 2
+//                        token_tv.text = it.data?.toString()
+//                        viewAnimator.displayedChild = 2
 
                     }
                 }
@@ -158,16 +161,16 @@ class MainActivity : AppCompatActivity(),
         mBackgroundVm.backgroundsData.observe(this@MainActivity, Observer {
             it?.let {
                 when (it.state) {
-                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
+//                    ResourceState.LOADING -> viewAnimator.displayedChild = 0
                     ResourceState.ERROR -> {
-                        viewAnimator.displayedChild = 1
-                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
-                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
+//                        viewAnimator.displayedChild = 1
+//                        val errorImageView: ImageView = findViewById(R.id.games_error_image)
+//                        Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
                     }
                     ResourceState.SUCCESS -> {
                         Timber.d("Background list size: ${it.data?.size}")
-                        token_tv.text = it.data?.toString()
-                        viewAnimator.displayedChild = 2
+//                        token_tv.text = it.data?.toString()
+//                        viewAnimator.displayedChild = 2
 
                     }
                 }
@@ -189,6 +192,5 @@ class MainActivity : AppCompatActivity(),
         super.onStart()
         mLoginVm.login(Login(login = "Admin", password = "admin2018"))
     }
-
 
 }

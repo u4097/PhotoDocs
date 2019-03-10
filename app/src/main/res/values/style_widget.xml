@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Toolbar: uses in layout: ac_mainscreen.xml and ac_login.xml -->
+    <style name="Widget.PhotoDocs.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
+        <item name="android:popupTheme">@style/ThemeOverlay.MaterialComponents.Light</item>
+        <item name="android:background">?attr/themePrimaryDark</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?actionBarSize</item>
+    </style>
+
+    <!-- *********************  Text ********************************************* -->
+
+    <!--Title-->
+    <style name="TextAppearance.PhotoDocs.Title" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!--Title Big-->
+    <style name="TextAppearance.PhotoDocs.Title.Big" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <!--Title Large-->
+    <style name="TextAppearance.PhotoDocs.Title.Large" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!--Content-->
+    <style name="TextAppearance.PhotoDocs.Content" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">?themeContentTextColor</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <!--Hint-->
+    <style name="TextAppearance.PhotoDocs.Hint" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!--Hint Small-->
+    <style name="TextAppearance.PhotoDocs.Hint.Small" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!--Hint Big-->
+    <style name="TextAppearance.PhotoDocs.Hint.Big" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- ******************* Buttons ************************************************** -->
+    <style name="Widget.PhotoDocs.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAppearance">@style/TextAppearance.PhotoDocs.Button</item>
+        <item name="android:layout_width">160dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:insetTop">4dp</item>
+        <item name="android:insetBottom">4dp</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <style name="TextAppearance.PhotoDocs.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textColor">?themeContentTextColoOnPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+    <!-- Profile fragment: Tab layout theme-->
+    <style name="TabLayoutProfile" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">17sp</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+
+    <!--DatePickerDialog-->
+    <style name="Theme.PhotoDocs.DateDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <!--Custom attributes-->
+        <item name="dialogCornerRadius">20dp</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+
+    <style name="Theme.PhotoDocs.LogoutDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="android:background">@color/white</item>
+    </style>
+
+
+</resources>
+

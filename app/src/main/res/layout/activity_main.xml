@@ -6,6 +6,7 @@
         android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".presentation.MainActivity">
 
+
     <include layout="@layout/toolbar"/>
 
     <!-- Nav Host Fragment -->
@@ -23,6 +24,5 @@
             app:defaultNavHost="true"
     />
 
-    <include layout="@layout/games_list"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
