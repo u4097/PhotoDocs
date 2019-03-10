@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/main_graph"
+            app:startDestination="@id/splash_fragment"
+>
+
+    <!--Splash-->
+    <fragment android:id="@+id/splash_fragment"
+              android:name="com.oleg.photodocs.presentation.splash.SplashFragment"
+              android:label="SplashFragment"
+              tools:layout="@layout/fmt_splash"
+    />
+</navigation>

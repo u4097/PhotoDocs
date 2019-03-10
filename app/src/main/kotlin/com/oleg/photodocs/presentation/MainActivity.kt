@@ -9,6 +9,9 @@ import android.widget.ViewAnimator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import com.oleg.photodocs.AppConfiguration.getRootViewContainerFor
 import com.oleg.photodocs.AppConfiguration.riseAndShine
 import com.oleg.photodocs.R
@@ -25,15 +28,42 @@ import kotlinx.android.synthetic.main.games_list.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
+interface ToolbarListener {
+    fun updateTitle(title: String)
+    fun hideToolbar()
+}
+
+interface NavigationListener {
+    fun navigate(action: NavDirections)
+    var mNavController: NavController
+}
+
+
+class MainActivity : AppCompatActivity(),
+    NavigationListener,
+    ToolbarListener {
+    override fun updateTitle(title: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideToolbar() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun navigate(action: NavDirections) {
+        Navigation.findNavController(this, R.id.host_fragment).navigate(action)
+    }
 
     private val mLoginVm: LoginViewModel by viewModel()
     private val mDocumentVm: DocumentViewModel by viewModel()
     private val mSuitVm: SuitViewModel by viewModel()
     private val mBackgroundVm: BackgroundViewModel by viewModel()
 
+    override lateinit var mNavController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         // Get root container to put our app's UI in. For a debug build this will have our debug drawer.
         // For a release build this will be the Activity's root container.
@@ -51,6 +81,17 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.home_toolbar)
 
         val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
+
+//        Navigation
+        mNavController = Navigation.findNavController(this, R.id.host_fragment)
+
+        mNavController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.splash_fragment -> {
+                    supportActionBar?.hide()
+                }
+            }
+        }
 
 
         // Observe ViewModel state and change UI accordingly.
@@ -134,11 +175,10 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-
         // Put refresh button in toolbar menu and have it refresh the games list.
         toolbar.inflateMenu(R.menu.home)
         toolbar.setOnMenuItemClickListener {
-//            mSuitVm.getSuits(refresh = false)
+            //            mSuitVm.getSuits(refresh = false)
             mBackgroundVm.getBackgrounds(refresh = false)
             return@setOnMenuItemClickListener true
         }

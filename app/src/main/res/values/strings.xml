@@ -2,7 +2,7 @@
     <string name="app_name">PhotoDocs</string>
     <string name="drawer_version_name">Name</string>
     <string name="drawer_version_code">Code</string>
-    <string name="loading">Loading photo…</string>
-    <string name="error">Error fetching photo</string>
+    <string name="loading">Загрузка...</string>
+    <string name="error">Ошибка при загрузке</string>
     <string name="refresh">Refresh</string>
 </resources>
