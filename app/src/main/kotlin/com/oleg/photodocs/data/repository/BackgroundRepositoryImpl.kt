@@ -33,7 +33,7 @@ class BackgroundRepositoryImpl constructor(
         }
         backgroundList?.let {
             if (!backgroundList?.isEmpty()!!) {
-                Timber.d("Get background list from cache.")
+                Timber.d("Get background from cache.")
                 return Resource(ResourceState.SUCCESS, backgroundList?.mapToDomain())
             }
         }

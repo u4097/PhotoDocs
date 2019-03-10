@@ -33,7 +33,7 @@ class DocumentRepositoryImpl constructor(
         }
         documentList?.let {
             if (!documentList?.isEmpty()!!) {
-                Timber.d("Get document list from cache")
+                Timber.d("Get document from cache")
                 return Resource(ResourceState.SUCCESS, documentList?.mapToDomain())
             }
         }

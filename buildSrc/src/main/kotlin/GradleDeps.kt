@@ -98,10 +98,12 @@ object Libraries {
 
     // RETROFIT
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val retrofitMock = "com.squareup.retrofit2:retrofit-mock:${Versions.retrofit}"
+    // MOSHI
     const val moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    // RETROFIT COROUTININES JAKEWHARTON
     const val retrofitCoroutines =
         "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.coroutinesRetrofit}"
-
     // COROUTINES
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val coroutinesKotlinAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"

@@ -118,6 +118,7 @@ dependencies {
 
     // Retrofit
     implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitMock)
     implementation(Libraries.retrofitCoroutines)
     // OkHttp
     implementation(Libraries.okhttp)
@@ -164,10 +165,10 @@ dependencies {
     implementation(Libraries.materialDialog)
 
     // TEST
-    testImplementation(Libraries.mockito)
-    testImplementation(Libraries.mockwebserver)
+//    testImplementation(Libraries.mockito)
+//    testImplementation(Libraries.mockwebserver)
     testImplementation(Libraries.kotlinTest)
     testImplementation(Libraries.koinTest)
     testImplementation(Libraries.androidArchTest)
-    testImplementation(Libraries.robolectric)
+//    testImplementation(Libraries.robolectric)
 }

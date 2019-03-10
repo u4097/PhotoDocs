@@ -33,7 +33,7 @@ class SuitRepositoryImpl constructor(
         }
         suitList?.let {
             if (!suitList?.isEmpty()!!) {
-                Timber.d("Get suit list from cache.")
+                Timber.d("Get suit from cache.")
                 return Resource(ResourceState.SUCCESS, suitList?.mapToDomain())
             }
         }
