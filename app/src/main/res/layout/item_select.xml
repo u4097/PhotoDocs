@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/passport_cv"
+        android:layout_width="164dp"
+        android:layout_height="164dp"
+        android:drawableTop="@drawable/ic_passport"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="16dp"
+        android:backgroundTint="@color/cardview_light_background"
+>
+    <ImageView
+            android:id="@+id/passport_iv"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_passport"
+    />
+    <TextView
+            android:id="@+id/name_tv"
+            android:text="Паспорт"
+            android:layout_marginTop="130dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.PhotoDocs.Content"
+    />
+</androidx.cardview.widget.CardView>
+

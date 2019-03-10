@@ -20,7 +20,7 @@ class DocumentViewModel constructor(val documentUseCase: DocumentUseCase) : Abst
 
     val documents = SingleLiveEvent<Resource<List<Document>>>()
 
-    fun getDocuments(refresh: Boolean) {
+    fun getDocuments(refresh: Boolean = false) {
         scope.launch {
             val response = documentUseCase.get(refresh)
             documents.postValue(response?.mapToPresentation())
