@@ -12,12 +12,28 @@
               android:label="SplashFragment"
               tools:layout="@layout/fmt_splash"
     >
-        <action android:id="@+id/action_splash_fragment_to_select_fragment" app:destination="@id/select_fragment"/>
+        <action android:id="@+id/action_to_select_fragment"
+                app:destination="@id/select_fragment"/>
     </fragment>
 
     <!--Select-->
     <fragment android:id="@+id/select_fragment"
               tools:layout="@layout/fmt_select"
               android:name="com.oleg.photodocs.presentation.select.SelectFragment"
-              android:label="SelectFragment"/>
+              android:label="SelectFragment">
+        <action android:id="@+id/action_to_camera_fragment"
+                app:destination="@id/camera_fragment"/>
+    </fragment>
+
+    <!--Camera-->
+    <fragment android:id="@+id/camera_fragment"
+              tools:layout="@layout/fmt_camera"
+              android:name="com.oleg.photodocs.presentation.camera.CameraFragment"
+              android:label="CameraFragment">
+
+        <argument android:name="documentName"
+                  app:argType="string"
+                  android:defaultValue=" "
+        />
+    </fragment>
 </navigation>

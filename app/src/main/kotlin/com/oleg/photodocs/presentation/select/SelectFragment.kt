@@ -1,11 +1,13 @@
 package com.oleg.photodocs.presentation.select
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.oleg.photodocs.R
 import com.oleg.photodocs.data.repository.resouces.ResourceState
 import com.oleg.photodocs.pref.PrefUtils
@@ -31,13 +33,15 @@ class SelectFragment : Fragment() {
 
             DocumentListAdapter.selectedItem = position
             adapter.notifyDataSetChanged()
+
+            val intent = Intent("android.media.action.IMAGE_CAPTURE")
+            startActivity(intent)
 //            PrefUtils.documentPid = document.id
 //            PrefUtils.documentName = document.name
 
-//            val action = CityListFragmentDirections.actionToArena()
+//            val action = SelectFragmentDirections.actionToCameraFragment()
 //            action.documentName = document.name
-//            action.documentPid = document.id
-//            (activity as NavigationListener).navigate(action)
+//            findNavController().navigate(R.id.camera_fragment)
         }
 
     private val adapter = DocumentListAdapter(itemClick)
@@ -56,7 +60,7 @@ class SelectFragment : Fragment() {
             it?.let {
                 when (it.state) {
                     ResourceState.ERROR -> {
-                        Timber.e("Failed get document:\n ${it.message}")
+                        Timber.e("Failed get Document's:\n ${it.message}")
                     }
                     ResourceState.SUCCESS -> {
                         adapter.submitList(it.data)
