@@ -26,9 +26,9 @@ object Versions {
     const val anko = "0.10.8"
     const val androidx = "1.1.0-alpha02"
     const val lifecycle = "2.0.0"
-    const val ktx = "1.0.0-alpha1"
+    const val ktx = "1.1.0-alpha04"
 
-    const val navigation = "1.0.0-beta02"
+    const val navigation = "2.0.0-rc02"
 
     const val constraintLayout = "2.0.0-alpha3"
 
@@ -38,7 +38,7 @@ object Versions {
     const val coroutinesRetrofit = "0.9.2"
     const val coroutines = "1.1.1"
 
-    const val fresco = "1.12.1"
+    const val fresco = "1.13.0"
     const val lottie = "3.0.0-beta1"
     const val decoro = "1.3.5"
     const val showhidepasswordedittext = "0.8"
@@ -61,7 +61,7 @@ object Versions {
 
     const val materialDisign = "1.0.0"
 
-    const val debugDrawer = "0.9.4"
+    const val debugDrawer = "0.9.5"
 
     const val picasso = "2.71828"
 
@@ -69,11 +69,11 @@ object Versions {
 
     const val androidArchTest = "1.1.1"
 
-    const val robolectric = "3.8"
+    const val robolectric = "4.2"
 
     const val layercache = "0.4.0"
 
-    const val mockito = "2.8.47"
+    const val mockito = "2.25.0"
 }
 
 
@@ -86,8 +86,8 @@ object Libraries {
     const val lifecycle = "android.arch.lifecycle:extensions:${Versions.lifecycle}"
 
     // NAVIGATION
-    const val navigationFragment = "android.arch.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    const val navigationUI = "android.arch.navigation:navigation-ui-ktx:${Versions.navigation}"
+    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
 
     // CONSTRAINT LAYOUT
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"

@@ -9,6 +9,7 @@ plugins {
     kotlin("android.extensions")
     id("androidx.navigation.safeargs")
     id("org.jmailen.kotlinter") version "1.21.0"
+    id("com.github.ben-manes.versions") version "0.21.0" // uses gradle depUp ; show old dependencies in terminal
 }
 
 androidExtensions {
@@ -169,10 +170,4 @@ dependencies {
     testImplementation(Libraries.koinTest)
     testImplementation(Libraries.androidArchTest)
     testImplementation(Libraries.robolectric)
-
-    testImplementation ("junit:junit:4.12")
-    testImplementation("androidx.test.ext:junit:1.1.0")
-    testImplementation("androidx.test.espresso:espresso-core:3.1.1")
-
-
 }
