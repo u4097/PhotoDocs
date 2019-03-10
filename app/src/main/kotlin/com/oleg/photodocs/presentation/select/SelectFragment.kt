@@ -23,12 +23,14 @@ import timber.log.Timber
  * Time: 10:06
  */
 
-class SelectFragment: Fragment() {
+class SelectFragment : Fragment() {
     private val mDocumentVm: DocumentViewModel by viewModel()
 
-    private val itemClick: (Document) -> Unit =
-        { document ->
+    private val itemClick: (Document, Int) -> Unit =
+        { document, position ->
 
+            DocumentListAdapter.selectedItem = position
+            adapter.notifyDataSetChanged()
 //            PrefUtils.documentPid = document.id
 //            PrefUtils.documentName = document.name
 

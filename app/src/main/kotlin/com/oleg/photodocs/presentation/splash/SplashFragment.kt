@@ -22,7 +22,7 @@ import com.oleg.photodocs.presentation.utils.inflate
 
 class SplashFragment: Fragment() {
 
-    private fun getSplashScreenDuration() = if (PrefUtils.token?.isEmpty()!!)2000L else 500L
+    private fun getSplashScreenDuration() = if (PrefUtils.token?.isEmpty()!!)2500L else 0L
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         scheduleSplashScreen()

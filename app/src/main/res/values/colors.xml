@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="red">#F61832</color>
+    <color name="redLight">#F61832</color>
     <color name="magenta">#C9186C</color>
     <color name="black">#ff1f1f1f</color>
     <color name="white">#ffffff</color>
