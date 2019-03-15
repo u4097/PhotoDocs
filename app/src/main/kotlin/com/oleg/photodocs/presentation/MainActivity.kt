@@ -1,7 +1,6 @@
 package com.oleg.photodocs.presentation
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,15 +17,11 @@ import com.oleg.photodocs.data.repository.resouces.ResourceState
 import com.oleg.photodocs.di.loadAppModules
 import com.oleg.photodocs.pref.PrefUtils
 import com.oleg.photodocs.presentation.model.login.Login
-import com.oleg.photodocs.presentation.splash.SplashFragmentDirections
-import com.oleg.photodocs.presentation.utils.visible
 import com.oleg.photodocs.presentation.viewmodel.BackgroundViewModel
 import com.oleg.photodocs.presentation.viewmodel.DocumentViewModel
 import com.oleg.photodocs.presentation.viewmodel.LoginViewModel
 import com.oleg.photodocs.presentation.viewmodel.SuitViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.viewModel
-import timber.log.Timber
 
 interface ToolbarListener {
     fun updateTitle(title: String)
