@@ -43,6 +43,8 @@ object Versions {
     const val decoro = "1.3.5"
     const val showhidepasswordedittext = "0.8"
 
+    const val jodaTime = "2.10.1.1"
+
     const val chuck = "1.1.0"
     const val timber = "4.7.1"
 
@@ -136,6 +138,7 @@ object Libraries {
     const val fresco = "com.facebook.fresco:fresco:${Versions.fresco}"
     // MATERIAL DIALOG
     const val materialDialog = "com.afollestad.material-dialogs:core:${Versions.materialDialog}"
+
 
 
     // DEBUG DRAWER
